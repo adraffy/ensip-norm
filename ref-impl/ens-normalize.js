@@ -22,7 +22,7 @@ for (let emoji of JSON.parse(await readFile(new URL('../emoji.json', import.meta
 	node.__valid = emoji;
 }
 
-// given codepoints
+// given codepoints (backwards)
 // find longest emoji match
 // allow optional FE0F
 // returns the full sequence
@@ -43,9 +43,9 @@ function consume_emoji(cps) {
 		fe0f = node.__fe0f;
 		if (node.__valid) { // this is a valid emoji (so far)
 			emoji = node.__valid;
-			if (fe0f && pos >= 0 && cps[pos] == 0xFE0F) { // eat FE0F too
+			if (fe0f && pos > 0 && cps[pos - 1] == 0xFE0F) { // eat FE0F too
 				fe0f = false;
-				pos++;
+				pos--;
 			}
 			cps.length = pos; // remove it from input
 		}
