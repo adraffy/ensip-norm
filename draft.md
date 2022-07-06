@@ -40,39 +40,39 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 1. Find the longest emoji sequence that matches the remaining input.
 	* Valid emoji sequences can be found in `emoji.json`.  
 	* Any `FE0F` is optional during matching.
-2. If an emoji sequence is found:
+1. If an emoji sequence is found:
 	* Strip all `FE0F` from the matching emoji sequence and append it to the output.
 	* Remove the matched sequence from the input.
 	* Go to step 1
-3. Determine the type of the leading codepoint.
+1. Determine the type of the leading codepoint.
 	* Types can be found in `chars.json`
-4. If `valid`:
+1. If `valid`:
 	* Remove the codepoint from the input
 	* Append the codepoint to the output
 	* Go to step 1
-5. If `mapped`:
+1. If `ignored`:
+	* Remove the codepoint from the input
+	* Go to step 1
+1. If `mapped`:
 	* Remove the codepoint from the input
 	* Append the mapped codepoints to the output
 	* Go to step 1
-6. If `ignored`:
-	* Remove the codepoint from the input
-	* Go to step 1
-7. The codepoint is disallowed.
+1. The codepoint is disallowed.
 
 ### Derivation of `chars.json`
 
 * [IDNA 2003](https://unicode.org/Public/idna/14.0.0/IdnaMappingTable.txt) with `UseSTD3ASCIIRules = true` and `Transitional_Processing = false`.
-* Alternative Stops (`3002 FF0E FF61`) are disallowed.
+* Alternative Stops `3002`, `FF0E`, and `FF61` are disallowed.
 * `200D (‍) ZWJ`, `200C (‌) ZWNJ`, `2800 (⠀) Braille Pattern Blank` are disallowed.
 * `0024 ($) Dollar Sign` and `005F (_) Underscore` are allowed.
-* All [single-codepoint Emoji](https://unicode.org/Public/14.0.0/ucd/emoji/emoji-data.txt) with [default emoji presentation](https://www.unicode.org/reports/tr51/#Presentation_Style) are disallowed.
+* All single-codepoint Emoji with default emoji presentation are disallowed.
 
 ### Derivation of `emoji.json`
 
 * [Emoji Sequence Whitelist](#appendix-emoji-sequence-whitelist)
 * All [RGI ZWJ sequences](https://unicode.org/Public/emoji/14.0/emoji-zwj-sequences.txt)
 * All [single-codepoint Emoji](https://unicode.org/Public/14.0.0/ucd/emoji/emoji-data.txt) with [default emoji presentation](https://www.unicode.org/reports/tr51/#Presentation_Style). 
-* All single-codepoint emoji with default text presentation are considered `valid` characters instead.
+* All single-codepoint emoji with default text presentation are not included.
 
 ## Backwards Compatibility
 
