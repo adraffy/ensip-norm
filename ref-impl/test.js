@@ -28,3 +28,4 @@ for (let test of JSON.parse(await readFile(new URL('../tests.json', import.meta.
 		}
 	}
 }
+console.log('OK');
