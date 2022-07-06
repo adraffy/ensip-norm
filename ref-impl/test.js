@@ -14,21 +14,17 @@ console.log(ens_normalize(ens_normalize('1️⃣'), true));
 // check validation tests
 for (let test of JSON.parse(await readFile(new URL('../tests.json', import.meta.url)))) {
 	let {name, norm, error} = test;
-	if (!norm) norm = name;
+	if (typeof norm !== 'string') norm = name;
 	try {
 		let result = ens_normalize(name);
 		if (error) {	
-			console.log({result, ...test});
-			throw new Error('expected error');
+			console.log({fail: 'expected error', result, ...test});
 		} else if (result != norm) {
-			console.log({result, ...test});
-			throw new Error(`wrong norm`);
+			console.log({fail: 'wrong norm', result, ...test});
 		}
 	} catch (err) {
 		if (!error) {
-			console.log(test);
-			console.log(err);
-			throw new Error('unexpected error');
+			console.log({fail: 'unexpected error', result: err.toString(), ...test});
 		}
 	}
 }

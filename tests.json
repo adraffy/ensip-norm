@@ -1,5 +1,315 @@
 [
   {
+    "name": "",
+    "comment": "Null"
+  },
+  {
+    "name": ".",
+    "comment": "Null Labels"
+  },
+  {
+    "name": ".eth",
+    "comment": "Null 2LD"
+  },
+  {
+    "name": "eth.",
+    "comment": "Null TLD"
+  },
+  {
+    "name": "...eth",
+    "comment": "Multiple Null Labels"
+  },
+  {
+    "name": "test．eth",
+    "error": true,
+    "comment": "Disallowed Stop: FF0E"
+  },
+  {
+    "name": "test。eth",
+    "error": true,
+    "comment": "Disallowed Stop: 3002"
+  },
+  {
+    "name": "test｡eth",
+    "error": true,
+    "comment": "Disallowed Stop: FF61"
+  },
+  {
+    "name": "vitalik.eth",
+    "comment": "Trivial Name"
+  },
+  {
+    "name": "123.eth",
+    "comment": "Trivial Digit Name"
+  },
+  {
+    "name": "abcdefghijklmnopqrstuvwxyz0123456789-.",
+    "comment": "DNS Name"
+  },
+  {
+    "name": "bRAnTlY.eTh",
+    "norm": "brantly.eth",
+    "comment": "Mixed-case"
+  },
+  {
+    "name": "BRANTLYMILLEGAN.COM",
+    "norm": "brantlymillegan.com",
+    "comment": "Uppercase"
+  },
+  {
+    "name": "brantly.cash",
+    "comment": "Custom domain"
+  },
+  {
+    "name": "nowzad.loopring.eth",
+    "comment": "Sub Domain"
+  },
+  {
+    "name": "öbb.at",
+    "comment": "IDNATestV2"
+  },
+  {
+    "name": "Öbb.at",
+    "norm": "öbb.at",
+    "comment": "IDNATestV2"
+  },
+  {
+    "name": "◌̈bb.at",
+    "comment": "IDNATestV2"
+  },
+  {
+    "name": "ß",
+    "comment": "IDNA deviation"
+  },
+  {
+    "name": "ς",
+    "comment": "IDNA deviation"
+  },
+  {
+    "name": "Ⅷ",
+    "norm": "viii",
+    "comment": "Mapping: roman numeral"
+  },
+  {
+    "name": "Ⓜ",
+    "norm": "m",
+    "comment": "Mapping: circled M"
+  },
+  {
+    "name": "Ⓜ️",
+    "norm": "m",
+    "comment": "Mapping: demoji"
+  },
+  {
+    "name": "🅜"
+  },
+  {
+    "name": "🅼"
+  },
+  {
+    "name": " ",
+    "error": true,
+    "comment": "Whitespace"
+  },
+  {
+    "name": "te st",
+    "error": true,
+    "comment": "Whitespace: inner"
+  },
+  {
+    "name": " test",
+    "error": true,
+    "comment": "Whitespace: leading"
+  },
+  {
+    "name": "test ",
+    "error": true,
+    "comment": "Whitespace: trailing"
+  },
+  {
+    "name": "test‍",
+    "error": true,
+    "comment": "ZWJ: trailing"
+  },
+  {
+    "name": "‍test",
+    "error": true,
+    "comment": "ZWJ: leading"
+  },
+  {
+    "name": "︎️",
+    "norm": "",
+    "comment": "Ignored: emoji-styling"
+  },
+  {
+    "name": "🚴‍♂️",
+    "norm": "🚴‍♂",
+    "comment": "Emoji: bicycle + ZWJ + male"
+  },
+  {
+    "name": "🏳️‍🌈",
+    "norm": "🏳‍🌈",
+    "comment": "Emoji: flag + ZWJ + rainbow"
+  },
+  {
+    "name": "👩🏽‍⚕️",
+    "norm": "👩🏽‍⚕",
+    "comment": "Emoji: women + ZWJ + doctor"
+  },
+  {
+    "name": "👁️‍🗨️",
+    "norm": "👁‍🗨",
+    "comment": "Emoji: eye + ZWJ + bubble"
+  },
+  {
+    "name": "6️⃣9️⃣",
+    "norm": "6⃣9⃣",
+    "comment": "Emoji: Keycaps"
+  },
+  {
+    "name": "#️⃣*️⃣",
+    "norm": "#⃣*⃣",
+    "comment": "Emoji: Revived Keycaps"
+  },
+  {
+    "name": "t_e__s___t",
+    "comment": "Underscore"
+  },
+  {
+    "name": "$¢£¤¥€₿",
+    "comment": "Currency symbols"
+  },
+  {
+    "name": "🇦",
+    "comment": "Single regional indicator"
+  },
+  {
+    "name": "🇦🇦",
+    "comment": "Double regional indicator: invalid flag sequence"
+  },
+  {
+    "name": "🇺🇸",
+    "comment": "Double regional indicator: valid flag sequence"
+  },
+  {
+    "name": "te--st",
+    "comment": "CheckHyphens, Section 4.1 Rule #2"
+  },
+  {
+    "name": "test-",
+    "comment": "CheckHyphens, Section 4.1 Rule #3A"
+  },
+  {
+    "name": "-test",
+    "comment": "CheckHyphens, Section 4.1 Rule #3B"
+  },
+  {
+    "name": "xn--ls8h",
+    "comment": "Punycode: valid"
+  },
+  {
+    "name": "xn--x",
+    "comment": "Punycode: invalid"
+  },
+  {
+    "name": "xn--💩",
+    "comment": "Punycode: invalid"
+  },
+  {
+    "name": "💩",
+    "comment": "Emoji: unstyled"
+  },
+  {
+    "name": "💩️",
+    "norm": "💩",
+    "comment": "Emoji: emoji-styled"
+  },
+  {
+    "name": "💩︎",
+    "norm": "💩",
+    "comment": "Emoji: text-styled"
+  },
+  {
+    "name": "💩💩︎💩️",
+    "norm": "💩💩💩",
+    "comment": "Emoji: All Styles"
+  },
+  {
+    "name": "💩‍💩",
+    "error": true,
+    "comment": "Poop Joiner"
+  },
+  {
+    "name": "‼️",
+    "error": true,
+    "comment": "double exclaimation mark"
+  },
+  {
+    "name": "⁉️",
+    "error": true,
+    "comment": "exclamation question mark"
+  },
+  {
+    "name": "👩︎🏽‍⚕️",
+    "error": true,
+    "comment": "Text-styled Modifier Sequence in ZWJ Sequence"
+  },
+  {
+    "name": "🏳︎‍🌈",
+    "error": true,
+    "comment": "Text-styled Emoji in ZWJ Sequence"
+  },
+  {
+    "name": "🌈rainbow",
+    "comment": "Emoji + Text"
+  },
+  {
+    "name": "rainbow🌈",
+    "comment": "Text + Emoji"
+  },
+  {
+    "name": "🧟‍♂",
+    "comment": "Zombie + ZWJ + Male"
+  },
+  {
+    "name": "🧟♂",
+    "comment": "Zombie + Male"
+  },
+  {
+    "name": "😵‍💫",
+    "comment": "Crossed-out + ZWJ + Dizzy"
+  },
+  {
+    "name": "😵💫",
+    "comment": "Crossed-out + Dizzy"
+  },
+  {
+    "name": "🏴",
+    "comment": "Flag emoji"
+  },
+  {
+    "name": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    "comment": "Emoji Tag Sequence: GBENG"
+  },
+  {
+    "name": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    "comment": "Emoji Tag Sequence: GBSCT"
+  },
+  {
+    "name": "🏴󠁧󠁢󠁷󠁬󠁳󠁿",
+    "comment": "Emoji Tag Sequence: GBWLS"
+  },
+  {
+    "name": "🏴󠁷󠁴󠁦󠁿",
+    "error": true,
+    "comment": "Invalid Emoji Tag Sequence"
+  },
+  {
+    "name": "۰۱۲۳۸۹",
+    "norm": "٠١٢٣٨٩",
+    "comment": "Arabic Mapping"
+  },
+  {
     "name": "✊🏻"
   },
   {
@@ -11475,1444 +11785,1754 @@
     "norm": "🤼🏿‍♀"
   },
   {
-    "name": "ctrl-a"
+    "name": "٠٠١٣"
   },
   {
-    "name": "happy-hour"
+    "name": "🧚🏻‍♂🧚🏻‍♂"
   },
   {
-    "name": "harōkiti"
+    "name": "eth-pay"
   },
   {
-    "name": "omitsu-issey"
+    "name": "🔥tinder"
   },
   {
-    "name": "5-oz"
+    "name": "crypto-fiend"
   },
   {
-    "name": "肖战王一博"
+    "name": "cuestión"
   },
   {
-    "name": "•tristan"
+    "name": "0-3-4"
   },
   {
-    "name": "ka-52"
+    "name": "69-88"
   },
   {
-    "name": "⠉⠗⠽⠏⠞⠕"
+    "name": "“facebook”"
   },
   {
-    "name": "sell-tickets"
+    "name": "八零五"
   },
   {
-    "name": "帝帝帝"
+    "name": "ترجمة"
   },
   {
-    "name": "the-rock"
+    "name": "8-0-2"
   },
   {
-    "name": "888-bbt-online"
+    "name": "the-exquisite"
   },
   {
-    "name": "👷👷‍♂"
+    "name": "元宇宙设计"
   },
   {
-    "name": "animal-welfare"
+    "name": "kattan-goncalo"
   },
   {
-    "name": "dame🌈"
+    "name": "二八一"
   },
   {
-    "name": "😽😽😽😽😽"
+    "name": "小企鹅"
   },
   {
-    "name": "٢١٠٠"
+    "name": "qasral-watan"
   },
   {
-    "name": "pool-party-minion"
+    "name": "对不起我是警察"
   },
   {
-    "name": "web3-dev"
+    "name": "0-9-8-7"
   },
   {
-    "name": "probably-nothing-dot-eth-is-yours-for-15"
+    "name": "bolsamadrid-es"
   },
   {
-    "name": "1⃣1⃣3⃣"
+    "name": "13-954"
   },
   {
-    "name": "bag-dangerous"
+    "name": "pörn"
   },
   {
-    "name": "moneybagg-yo"
+    "name": "95-59"
   },
   {
-    "name": "brandonhuntley-hatfield"
+    "name": "⏰⏰⏰⏰⏰"
   },
   {
-    "name": "diegovelázquez"
+    "name": "en-gage"
   },
   {
-    "name": "せんせい"
+    "name": "砍死举报人"
   },
   {
-    "name": "spacex🚀🚀🚀"
+    "name": "中国比特币"
   },
   {
-    "name": "murat-pak"
+    "name": "⚽bayernmunich"
   },
   {
-    "name": "2-d"
+    "name": "vip-art"
   },
   {
-    "name": "ww3-unitedkingdom"
+    "name": "🤟🤟🤟"
   },
   {
-    "name": "🧑🏻‍⚖"
+    "name": "해군사관학교"
   },
   {
-    "name": "man-bat"
+    "name": "r-6"
   },
   {
-    "name": "alex-agman"
+    "name": "v-strom"
   },
   {
-    "name": "888⁄8"
+    "name": "0⃣5⃣🔟"
   },
   {
-    "name": "🍭🍡🍭"
+    "name": "🔟0⃣5⃣"
   },
   {
-    "name": "yön"
+    "name": "🐵🤝🐵"
   },
   {
-    "name": "ستون"
+    "name": "1-s"
   },
   {
-    "name": "بابا"
+    "name": "monets-garden"
   },
   {
-    "name": "smol-ting"
+    "name": "nameless📛"
   },
   {
-    "name": "i💗pranksy"
+    "name": "bored-ape-chemistry-club"
   },
   {
-    "name": "33-8"
+    "name": "democratjp🇺🇸"
   },
   {
-    "name": "🧛🏼‍♂"
+    "name": "j-ace"
   },
   {
-    "name": "💎fist"
+    "name": "soo-bin"
   },
   {
-    "name": "0x👨‍💻"
+    "name": "kilo-watt"
   },
   {
-    "name": "🦔🦔🦔🦔"
+    "name": "s-o-x"
   },
   {
-    "name": "on-demandliquidity"
+    "name": "9-66"
   },
   {
-    "name": "starbucks-us"
+    "name": "tête-à-tête"
   },
   {
-    "name": "1-1art"
+    "name": "ハッピー"
   },
   {
-    "name": "😄😄😀"
+    "name": "w❤gmi"
   },
   {
-    "name": "五七一"
+    "name": "feel-mining"
   },
   {
-    "name": "e-pass"
+    "name": "ماجد"
   },
   {
-    "name": "❤sex"
+    "name": "🐷🐷🐷🐷🐷🐷"
   },
   {
-    "name": "imóveis"
+    "name": "v-g"
   },
   {
-    "name": "low-cost"
+    "name": "—1234"
   },
   {
-    "name": "made-to-order"
+    "name": "🏈cards"
   },
   {
-    "name": "k-cee"
+    "name": "daniel-datsenko"
   },
   {
-    "name": "sex-video"
+    "name": "paper-hands"
   },
   {
-    "name": "0x7⃣6⃣3⃣"
+    "name": "señorfomo"
   },
   {
-    "name": "timbaland-otherside"
+    "name": "🏊🏼‍♀"
   },
   {
-    "name": "3--8"
+    "name": "соск"
   },
   {
-    "name": "🫖time"
+    "name": "纳斯达克"
   },
   {
-    "name": "dallas-cowboys"
+    "name": "588-588-5888"
   },
   {
-    "name": "420-guy"
+    "name": "3⃣1⃣9⃣"
   },
   {
-    "name": "v-zelenskyy"
+    "name": "nft-airdrop"
   },
   {
-    "name": "420-20"
+    "name": "châteaucrypto"
   },
   {
-    "name": "💖💖💖💖💖💖💖"
+    "name": "mizuki-hack"
   },
   {
-    "name": "edgeandnode-indexer-01-us-central"
+    "name": "666-666-666"
   },
   {
-    "name": "roland-kaiser"
+    "name": "🦍boss"
   },
   {
-    "name": "dänemark"
+    "name": "volodymyr-zelensky"
   },
   {
-    "name": "10-0"
+    "name": "🍔shack"
   },
   {
-    "name": "“444”"
+    "name": "شرف"
   },
   {
-    "name": "12-1"
+    "name": "futures-cash"
   },
   {
-    "name": "master-card"
+    "name": "diegoz-nft"
   },
   {
-    "name": "٢٢٧"
+    "name": "e-instruction"
   },
   {
-    "name": "碧桂园"
+    "name": "ww3-newzealand"
   },
   {
-    "name": "you’d"
+    "name": "nftsensei-abuser"
   },
   {
-    "name": "我思故我在"
+    "name": "blm-law"
   },
   {
-    "name": "crypto-nl"
+    "name": "7-10"
   },
   {
-    "name": "🇱🇹🇱🇹"
+    "name": "فورمولا١"
   },
   {
-    "name": "🥕🥕🥕🥕🥕🥕"
+    "name": "ethereum-global"
   },
   {
-    "name": "روتانا"
+    "name": "royal-delft"
   },
   {
-    "name": "böb"
+    "name": "🥃liquor"
   },
   {
-    "name": "🥱🐒🛥club"
+    "name": "play-p"
   },
   {
-    "name": "4⃣3⃣9⃣"
+    "name": "saudiaarabia🇸🇦"
   },
   {
-    "name": "l-love-you"
+    "name": "ᴄᴄᴄ"
   },
   {
-    "name": "fierté"
+    "name": "152-chikorita"
   },
   {
-    "name": "top-class-escort"
+    "name": "ちんちん"
   },
   {
-    "name": "元猴001"
+    "name": "do-woon"
   },
   {
-    "name": "divine-robe"
+    "name": "⛹🏽‍♀⛹🏽‍♀"
   },
   {
-    "name": "💀☠💀"
+    "name": "guild-host"
   },
   {
-    "name": "april-1-1976"
+    "name": "🇹🇱🇹🇱🇹🇱"
   },
   {
-    "name": "🏒🏒🏒🏒"
+    "name": "智能家居行业网"
   },
   {
-    "name": "vendôme"
+    "name": "aña"
   },
   {
-    "name": "exploding-heads"
+    "name": "shirley-h"
   },
   {
-    "name": "cybξrpunk"
+    "name": "三mma"
   },
   {
-    "name": "kakashi-nakamoto"
+    "name": "π314159265359"
   },
   {
-    "name": "德意志银行"
+    "name": "eth-addict"
   },
   {
-    "name": "doro-doro"
+    "name": "六百八十三"
   },
   {
-    "name": "🏹🏹🏹🏹🏹"
+    "name": "🚀🚀🚀"
   },
   {
-    "name": "sci-fi"
+    "name": "🙌🙌🙌🙌🙌"
   },
   {
-    "name": "hyatt-regency"
+    "name": "128-tauros"
   },
   {
-    "name": "0⃣8⃣4⃣"
+    "name": "八七九"
   },
   {
-    "name": "status-cracked"
+    "name": "כֶּסֶף"
   },
   {
-    "name": "6⃣1⃣1⃣6⃣"
+    "name": "0x🍻"
   },
   {
-    "name": "philadelphia-eagles"
+    "name": "6-r"
   },
   {
-    "name": "شایان"
+    "name": "🏋🏾‍♀🏋🏾‍♀🏋🏾‍♀"
   },
   {
-    "name": "٣٦٠"
+    "name": "dark-charizard"
   },
   {
-    "name": "on-air"
+    "name": "al-ghamidi"
   },
   {
-    "name": "3-28"
+    "name": "al-fawzaan"
   },
   {
-    "name": "nathan-amanda"
+    "name": "sternburg-bier"
   },
   {
-    "name": "69🍑"
+    "name": "zk-rollup"
   },
   {
-    "name": "0-koda"
+    "name": "٦٥٥"
   },
   {
-    "name": "🇨🇦dan"
+    "name": "charlie-t"
   },
   {
-    "name": "chibakogyo-bank"
+    "name": "111🦍"
   },
   {
-    "name": "owe-me"
+    "name": "lazy-cubs"
   },
   {
-    "name": "k-drama"
+    "name": "too-sexy"
   },
   {
-    "name": "233-porygon2"
+    "name": "naked🐺"
   },
   {
-    "name": "b-a-y-c"
+    "name": "finance-jobs"
   },
   {
-    "name": "data-mining"
+    "name": "010-034"
   },
   {
-    "name": "8-12"
+    "name": "♥♥♥♥"
   },
   {
-    "name": "card-id"
+    "name": "swarm-download"
   },
   {
-    "name": "fast-fashion"
+    "name": "0x-88"
   },
   {
-    "name": "🇫🇷guerlain"
+    "name": "٥٧٧٥"
   },
   {
-    "name": "0x-mewtwo"
+    "name": "a-chunky"
   },
   {
-    "name": "9-6-7"
+    "name": "al-yousuf"
   },
   {
-    "name": "🏄🏼‍♂🏄🏼‍♂"
+    "name": "💯💎🙌"
   },
   {
-    "name": "g-y-p-s-y"
+    "name": "8⃣5⃣2⃣"
   },
   {
-    "name": "a-pian"
+    "name": "ethereum-virtual-machine"
   },
   {
-    "name": "‘panda’"
+    "name": "target-fluctuation"
   },
   {
-    "name": "曹操出行"
+    "name": "八三三三八"
   },
   {
-    "name": "knight-swift"
+    "name": "维尼吃蜜你吃屁"
   },
   {
-    "name": "r-n0ld"
+    "name": "04-30"
   },
   {
-    "name": "🇨🇳chinese"
+    "name": "🇻🇳🇻🇳🇻🇳"
   },
   {
-    "name": "jtxx-vault"
+    "name": "g-mate"
   },
   {
-    "name": "3-9-5"
+    "name": "₿55"
   },
   {
-    "name": "666-888"
+    "name": "haruka-kodama"
   },
   {
-    "name": "top-rank"
+    "name": "🚶🏽‍♂"
   },
   {
-    "name": "0x0⃣7⃣"
+    "name": "🏿🏿🏿"
   },
   {
-    "name": "moon-god"
+    "name": "0x-casino"
   },
   {
-    "name": "💰🏛📱⚡"
+    "name": "hi-meta"
   },
   {
-    "name": "pokédexclub"
+    "name": "rotary-international"
   },
   {
-    "name": "ka-pow"
+    "name": "miracle-enterprises"
   },
   {
-    "name": "vanilla-kush"
+    "name": "👨‍✈🕵‍♂"
   },
   {
-    "name": "b-x"
+    "name": "swiss-nft"
   },
   {
-    "name": "🀅🀅🀅🀅🀅"
+    "name": "l-m-f-a-o"
   },
   {
-    "name": "hellmann-s"
+    "name": "crypto-pagan"
   },
   {
-    "name": "blueberry🫐"
+    "name": "defi-banking"
   },
   {
-    "name": "wagmisabi-vault"
+    "name": "table-tennis"
   },
   {
-    "name": "🅿park"
+    "name": "▼▲▼"
   },
   {
-    "name": "🖕🏽🖕🏾"
+    "name": "ai-lab"
   },
   {
-    "name": "•bitcoin"
+    "name": "🎐🎐🎐"
   },
   {
-    "name": "voxel🎨"
+    "name": "👳🏼‍♂👑"
   },
   {
-    "name": "king🤴"
+    "name": "btc-official"
   },
   {
-    "name": "🚀🌕🚀"
+    "name": "gringotts-vault"
   },
   {
-    "name": "888-888-888-888-888-888-888-888"
+    "name": "port-tauranga"
   },
   {
-    "name": "👷🏽👷🏽👷🏽"
+    "name": "🍎car"
   },
   {
-    "name": "₿ased"
+    "name": "👼god👼"
   },
   {
-    "name": "polo🐎"
+    "name": "k-4"
   },
   {
-    "name": "kl-xp"
+    "name": "metaverse-real-estate"
   },
   {
-    "name": "loro-parqe"
+    "name": "kanye-yeezus"
   },
   {
-    "name": "🇺🇦🕊🇷🇺"
+    "name": "soy-boy"
   },
   {
-    "name": "セガ公式アカウント"
+    "name": "s-mac"
   },
   {
-    "name": "blue-pencil"
+    "name": "🤭🤭🤭🤭🤭"
   },
   {
-    "name": "٣٤٥٦"
+    "name": "el-tiempo"
   },
   {
-    "name": "七三一"
+    "name": "👇👇👇👇👇"
   },
   {
-    "name": "ماجدالفطيم"
+    "name": "🐇jack"
   },
   {
-    "name": "og-eric"
+    "name": "ジーランス"
   },
   {
-    "name": "top-build"
+    "name": "شاهدانه"
   },
   {
-    "name": "move-to-earn"
+    "name": "uae🇦🇪"
   },
   {
-    "name": "gutter😼gang"
+    "name": "🏎🏎🏎🏎🏎🏎"
   },
   {
-    "name": "0-btc"
+    "name": "stranger-things"
   },
   {
-    "name": "hai-ko"
+    "name": "e-power"
   },
   {
-    "name": "मारिजुआना"
+    "name": "🥲🥲🥲"
   },
   {
-    "name": "🇷🇺🇺🇦☮"
+    "name": "🧛🧛🧛🧛"
   },
   {
-    "name": "ヒメンカ"
+    "name": "jean-georges"
   },
   {
-    "name": "mr-og"
+    "name": "2222-2222-2222"
   },
   {
-    "name": "0x€€"
+    "name": "elon❤"
   },
   {
-    "name": "gold-chains"
+    "name": "pierre-fabre"
   },
   {
-    "name": "⏳⌛⏳⌛⏳"
+    "name": "opinión"
   },
   {
-    "name": "keepit🅿"
+    "name": "kwang-mo"
   },
   {
-    "name": "🅟🅐🅒🅚🅔🅡🅢🏈"
+    "name": "👉👈🥺"
   },
   {
-    "name": "stats📈📉"
+    "name": "lgbtqia🌈"
   },
   {
-    "name": "三六九"
+    "name": "🐵apein"
   },
   {
-    "name": "nft-mortgages"
+    "name": "minty💥"
   },
   {
-    "name": "yo-kaiwatch"
+    "name": "miles-morales"
   },
   {
-    "name": "cyber-warrior"
+    "name": "北京天安门"
   },
   {
-    "name": "🦞🦞🦞🦞"
+    "name": "anna-susanna"
   },
   {
-    "name": "👨👨👨"
+    "name": "xyz-123"
   },
   {
-    "name": "accre-tech"
+    "name": "0⃣0⃣5⃣2⃣"
   },
   {
-    "name": "ピチュー"
+    "name": "العرب"
   },
   {
-    "name": "imobiliária"
+    "name": "urawa-reds"
   },
   {
-    "name": "kieser-training"
+    "name": "0--00"
   },
   {
-    "name": "michter’s"
+    "name": "plai-ltd"
   },
   {
-    "name": "一百九十一"
+    "name": "🐦🐦🐦🐦🐦"
   },
   {
-    "name": "🧗‍♂🧗‍♂"
+    "name": "owen-wallet"
   },
   {
-    "name": "🇰🇾🇰🇾"
+    "name": "✿◠‿◠"
   },
   {
-    "name": "jenny-craig"
+    "name": "e-hub"
   },
   {
-    "name": "b🦍yc8877"
+    "name": "l-4"
   },
   {
-    "name": "nikke-kr"
+    "name": "الماسات"
   },
   {
-    "name": "pennon-group"
+    "name": "ɐᴉlɐɹʇsnɐ"
   },
   {
-    "name": "ヤンヤンマ"
+    "name": "🌀🌀🌀🌀"
   },
   {
-    "name": "44-88"
+    "name": "吃一堑长一智"
   },
   {
-    "name": "dairy-free"
+    "name": "日本銀行"
   },
   {
-    "name": "7⃣8⃣3⃣"
+    "name": "crypto-osan"
   },
   {
-    "name": "silent-yachts"
+    "name": "lebronjames🐐"
   },
   {
-    "name": "⇂00"
+    "name": "1-e"
   },
   {
-    "name": "1997🐮"
+    "name": "🌳🌳🌳🌳"
   },
   {
-    "name": "ユルサナイヨ"
+    "name": "henkel-northamerica"
   },
   {
-    "name": "lucky-7"
+    "name": "👨‍🎤📰✂"
   },
   {
-    "name": "1-6-3"
+    "name": "۴۴۴۴"
   },
   {
-    "name": "bank-of-communications"
+    "name": "0x-99"
   },
   {
-    "name": "u-s"
+    "name": "wfh-death"
   },
   {
-    "name": "meta-entertainment"
+    "name": "punk-ape"
   },
   {
-    "name": "paramount-plus"
+    "name": "42-6"
   },
   {
-    "name": "khalīfah"
+    "name": "東京市"
   },
   {
-    "name": "z-mak"
+    "name": "😘🍑😈"
   },
   {
-    "name": "11-22-1962"
+    "name": "सेक्स"
   },
   {
-    "name": "sumitomo-chem"
+    "name": "🇾🇪🇾🇪"
   },
   {
-    "name": "olivia-rodrigo"
+    "name": "s-l"
   },
   {
-    "name": "🤠🤠🤠🤠🤠🤠"
+    "name": "8-oz"
   },
   {
-    "name": "got-web3"
+    "name": "starbucks-cn"
   },
   {
-    "name": "😄happy"
+    "name": "e-booking"
   },
   {
-    "name": "420🐐"
+    "name": "coast-coast"
   },
   {
-    "name": "tow-truck"
+    "name": "8-1-7-3"
   },
   {
-    "name": "伊隆·麥斯克"
+    "name": "nft-queen1"
   },
   {
-    "name": "rhino🦏"
+    "name": "🐵🐵🐵"
   },
   {
-    "name": "mong-koo"
+    "name": "٠٠٠٩٩"
   },
   {
-    "name": "jordan-23"
+    "name": "🏌🏻‍♂⛳"
   },
   {
-    "name": "🇦🇪uae🇦🇪"
+    "name": "123-xyz"
   },
   {
-    "name": "6⃣2⃣5⃣"
+    "name": "mercedes-benz-electromobility"
   },
   {
-    "name": "p-o-t"
+    "name": "4008-517-517"
   },
   {
-    "name": "nft-drewsky"
+    "name": "rìch"
   },
   {
-    "name": "hadlξy"
+    "name": "easter🐰"
   },
   {
-    "name": "🇲🇽🍞🇺🇸"
+    "name": "6969-6969"
   },
   {
-    "name": "wallet-777"
+    "name": "voynich-manuscript"
   },
   {
-    "name": "jarno🐺"
+    "name": "dio-porco"
   },
   {
-    "name": "0x🇳🇱"
+    "name": "📰wallstreetjournal"
   },
   {
-    "name": "九九八"
+    "name": "🦆🦆🦆🦆🦆🦆"
   },
   {
-    "name": "catalin-iulian"
+    "name": "٤١١"
   },
   {
-    "name": "28-28-28"
+    "name": "auger-aliassime"
   },
   {
-    "name": "🐺🐺🐺🐺🐺"
+    "name": "9⃣4⃣3⃣"
   },
   {
-    "name": "kbc-associates"
+    "name": "crypto-prince"
   },
   {
-    "name": "land-bayc"
+    "name": "泡泡玛特"
   },
   {
-    "name": "jason-derulo"
+    "name": "eth-3"
   },
   {
-    "name": "🏊🏻‍♂🏊🏻‍♂"
+    "name": "7⃣8⃣6⃣7⃣8⃣6⃣"
   },
   {
-    "name": "harvard-edu"
+    "name": "al-shammari"
   },
   {
-    "name": "11-september"
+    "name": "🤹🏽‍♀🤹🏽‍♀"
   },
   {
-    "name": "0-6-7"
+    "name": "token-king"
   },
   {
-    "name": "mexico⚽"
+    "name": "louisvuitton-nft"
   },
   {
-    "name": "Nestlé",
-    "norm": "nestlé"
+    "name": "۲۰۲",
+    "norm": "٢٠٢"
   },
   {
-    "name": "🌬️🌬️",
-    "norm": "🌬🌬"
+    "name": "۰۰۰۰۲",
+    "norm": "٠٠٠٠٢"
   },
   {
-    "name": "bancoagrÃ­coladechina",
-    "norm": "bancoagrãcoladechina"
+    "name": "۰٥۰٤۹۹۹۹۹۹۹",
+    "norm": "٠٥٠٤٩٩٩٩٩٩٩"
   },
   {
-    "name": "EIP-1559",
-    "norm": "eip-1559"
+    "name": "۸٤۸",
+    "norm": "٨٤٨"
   },
   {
-    "name": "☺️☺️",
-    "norm": "☺☺"
+    "name": "۰٥٦۹۹۹۹۹۹٥",
+    "norm": "٠٥٦٩٩٩٩٩٩٥"
   },
   {
-    "name": "T-Mobile",
-    "norm": "t-mobile"
+    "name": "۱٤۳",
+    "norm": "١٤٣"
   },
   {
-    "name": "Oculus-VR",
-    "norm": "oculus-vr"
+    "name": "۰۰۰۱",
+    "norm": "٠٠٠١"
   },
   {
-    "name": "Harley-Davidson",
-    "norm": "harley-davidson"
+    "name": "۱۹۱",
+    "norm": "١٩١"
   },
   {
-    "name": "🧞‍♂️🧞‍♂️🧞‍♂️",
-    "norm": "🧞‍♂🧞‍♂🧞‍♂"
+    "name": "۰۰٥",
+    "norm": "٠٠٥"
   },
   {
-    "name": "☃️☃️",
-    "norm": "☃☃"
+    "name": "۸۰٨",
+    "norm": "٨٠٨"
   },
   {
-    "name": "🕊️🕊️",
-    "norm": "🕊🕊"
+    "name": "۱۲۳٤",
+    "norm": "١٢٣٤"
   },
   {
-    "name": "☹️☹️",
-    "norm": "☹☹"
+    "name": "۷۱٤",
+    "norm": "۷١٤"
   },
   {
-    "name": "☠️☠️",
-    "norm": "☠☠"
+    "name": "۰۰۸",
+    "norm": "٠٠٨"
   },
   {
-    "name": "⚒️⚒️",
-    "norm": "⚒⚒"
-  },
-  {
-    "name": "💎️💎️💎️",
-    "norm": "💎💎💎"
-  },
-  {
-    "name": "computaciÃ³ncuantica",
-    "norm": "computaciã3ncuantica"
-  },
-  {
-    "name": "4️⃣2️⃣",
-    "norm": "4⃣2⃣"
-  },
-  {
-    "name": "Mercedes-Benz",
-    "norm": "mercedes-benz"
-  },
-  {
-    "name": "❄️❄️",
-    "norm": "❄❄"
-  },
-  {
-    "name": "Фармасинтез",
-    "norm": "фармасинтез"
-  },
-  {
-    "name": "☄️☄️",
-    "norm": "☄☄"
+    "name": "۱٠٠۱",
+    "norm": "١٠٠١"
   },
   {
     "name": "7️⃣7️⃣7️⃣",
     "norm": "7⃣7⃣7⃣"
   },
   {
-    "name": "Martial-arts",
-    "norm": "martial-arts"
+    "name": "۰۷۰",
+    "norm": "٠۷٠"
   },
   {
-    "name": "☠️☠️☠️",
-    "norm": "☠☠☠"
+    "name": "⚒️⚒️",
+    "norm": "⚒⚒"
   },
   {
-    "name": "🐋️🐋️🐋️",
-    "norm": "🐋🐋🐋"
+    "name": "۱۲۳",
+    "norm": "١٢٣"
   },
   {
-    "name": "Coca-Cola",
-    "norm": "coca-cola"
+    "name": "٤۲۰",
+    "norm": "٤٢٠"
   },
   {
-    "name": "Jiu-jitsu",
-    "norm": "jiu-jitsu"
+    "name": "٥۰٥",
+    "norm": "٥٠٥"
+  },
+  {
+    "name": "۱۲۳۲۱",
+    "norm": "١٢٣٢١"
+  },
+  {
+    "name": "۲۲۲۲",
+    "norm": "٢٢٢٢"
+  },
+  {
+    "name": "٦۸۷",
+    "norm": "٦٨۷"
+  },
+  {
+    "name": "٥۸٦",
+    "norm": "٥٨٦"
+  },
+  {
+    "name": "۷۹۳",
+    "norm": "۷٩٣"
+  },
+  {
+    "name": "۰۳۰۰",
+    "norm": "٠٣٠٠"
+  },
+  {
+    "name": "٥۰۰",
+    "norm": "٥٠٠"
+  },
+  {
+    "name": "۰۸۳",
+    "norm": "٠٨٣"
+  },
+  {
+    "name": "۰٥۸۹۹۹۹۹۹۹",
+    "norm": "٠٥٨٩٩٩٩٩٩٩"
+  },
+  {
+    "name": "۰۰۳",
+    "norm": "٠٠٣"
+  },
+  {
+    "name": "۳۳۳۳",
+    "norm": "٣٣٣٣"
+  },
+  {
+    "name": "٠٠٠۸",
+    "norm": "٠٠٠٨"
   },
   {
     "name": "Chick-fil-A",
     "norm": "chick-fil-a"
   },
   {
-    "name": "🛰️🛰️",
-    "norm": "🛰🛰"
+    "name": "☹️☹️",
+    "norm": "☹☹"
   },
   {
-    "name": "👁️👁️",
-    "norm": "👁👁"
+    "name": "۱۰۱۰۱",
+    "norm": "١٠١٠١"
   },
   {
-    "name": "🖼️🖼️",
-    "norm": "🖼🖼"
+    "name": "٤۰۰",
+    "norm": "٤٠٠"
   },
   {
-    "name": "⚜️⚜️",
-    "norm": "⚜⚜"
+    "name": "۹۹۹",
+    "norm": "٩٩٩"
   },
   {
-    "name": "🕊️🕊️.eth",
-    "norm": "🕊🕊.eth"
+    "name": "۱۱۱",
+    "norm": "١١١"
   },
   {
-    "name": "⚔️⚔️",
-    "norm": "⚔⚔"
+    "name": "٤۳٦",
+    "norm": "٤٣٦"
   },
   {
-    "name": "🦄️🦄🦄",
-    "norm": "🦄🦄🦄"
+    "name": "۱۸۹",
+    "norm": "١٨٩"
   },
   {
-    "name": "6️9️",
-    "norm": "69"
+    "name": "۹۹۸",
+    "norm": "٩٩٨"
   },
   {
-    "name": "6️9️6️9️6️9️",
-    "norm": "696969"
+    "name": "۷۰۰",
+    "norm": "۷٠٠"
   },
   {
-    "name": "8​6​8",
-    "norm": "868"
+    "name": "۰٦۷",
+    "norm": "٠٦۷"
   },
   {
-    "name": "i❤️hk",
-    "norm": "i❤hk"
+    "name": "۷۷۲",
+    "norm": "۷۷٢"
   },
   {
-    "name": "i❤️sh",
-    "norm": "i❤sh"
+    "name": "۳٥٦",
+    "norm": "٣٥٦"
   },
   {
-    "name": "i❤️tw",
-    "norm": "i❤tw"
+    "name": "۲۰۰۰",
+    "norm": "٢٠٠٠"
+  },
+  {
+    "name": "۰۰۶",
+    "norm": "٠٠۶"
+  },
+  {
+    "name": "۰۸٨",
+    "norm": "٠٨٨"
+  },
+  {
+    "name": "۱۸۳",
+    "norm": "١٨٣"
+  },
+  {
+    "name": "۲۰۰۰۰",
+    "norm": "٢٠٠٠٠"
+  },
+  {
+    "name": "۹۰۰",
+    "norm": "٩٠٠"
+  },
+  {
+    "name": "۰۱۰",
+    "norm": "٠١٠"
+  },
+  {
+    "name": "۷۸۷",
+    "norm": "۷٨۷"
+  },
+  {
+    "name": "٠٠۳",
+    "norm": "٠٠٣"
+  },
+  {
+    "name": "۲۸۹",
+    "norm": "٢٨٩"
+  },
+  {
+    "name": "۰۸۸۰",
+    "norm": "٠٨٨٠"
+  },
+  {
+    "name": "۱۷۱",
+    "norm": "١۷١"
+  },
+  {
+    "name": "Coca-Cola",
+    "norm": "coca-cola"
+  },
+  {
+    "name": "۱۸۷",
+    "norm": "١٨۷"
+  },
+  {
+    "name": "۱٥۳",
+    "norm": "١٥٣"
   },
   {
     "name": "ΞΞΞ",
     "norm": "ξξξ"
   },
   {
-    "name": "­420­",
-    "norm": "420"
+    "name": "۰۵۲۲۲۲۲۲۲۲",
+    "norm": "٠۵٢٢٢٢٢٢٢٢"
   },
   {
-    "name": "­­x",
-    "norm": "x"
+    "name": "🕊️🕊️",
+    "norm": "🕊🕊"
+  },
+  {
+    "name": "۷۹۲",
+    "norm": "۷٩٢"
+  },
+  {
+    "name": "۰۵۰",
+    "norm": "٠۵٠"
+  },
+  {
+    "name": "۱٥۱",
+    "norm": "١٥١"
+  },
+  {
+    "name": "۷۲۱",
+    "norm": "۷٢١"
+  },
+  {
+    "name": "👁️👁️",
+    "norm": "👁👁"
+  },
+  {
+    "name": "۲٤۸",
+    "norm": "٢٤٨"
+  },
+  {
+    "name": "Martial-arts",
+    "norm": "martial-arts"
+  },
+  {
+    "name": "۷۸۲",
+    "norm": "۷٨٢"
+  },
+  {
+    "name": "٦۲۳",
+    "norm": "٦٢٣"
+  },
+  {
+    "name": "۷۸٦٠",
+    "norm": "۷٨٦٠"
+  },
+  {
+    "name": "۰٥٥",
+    "norm": "٠٥٥"
+  },
+  {
+    "name": "🧞‍♂️🧞‍♂️🧞‍♂️",
+    "norm": "🧞‍♂🧞‍♂🧞‍♂"
+  },
+  {
+    "name": "٦۲۹",
+    "norm": "٦٢٩"
+  },
+  {
+    "name": "۰۲۷",
+    "norm": "٠٢۷"
+  },
+  {
+    "name": "۰۹۹",
+    "norm": "٠٩٩"
+  },
+  {
+    "name": "۷۸۶",
+    "norm": "۷٨۶"
+  },
+  {
+    "name": "٦۳٦",
+    "norm": "٦٣٦"
+  },
+  {
+    "name": "۰۰۱",
+    "norm": "٠٠١"
+  },
+  {
+    "name": "☺️☺️",
+    "norm": "☺☺"
+  },
+  {
+    "name": "۰۰۰",
+    "norm": "٠٠٠"
+  },
+  {
+    "name": "۸۷۹",
+    "norm": "٨۷٩"
+  },
+  {
+    "name": "۳۲۱",
+    "norm": "٣٢١"
+  },
+  {
+    "name": "۹٥۹",
+    "norm": "٩٥٩"
+  },
+  {
+    "name": "۰۳۱",
+    "norm": "٠٣١"
+  },
+  {
+    "name": "۰۹۰",
+    "norm": "٠٩٠"
+  },
+  {
+    "name": "۰۹۹۰",
+    "norm": "٠٩٩٠"
+  },
+  {
+    "name": "Harley-Davidson",
+    "norm": "harley-davidson"
+  },
+  {
+    "name": "۹۸۹",
+    "norm": "٩٨٩"
+  },
+  {
+    "name": "۹۶۹",
+    "norm": "٩۶٩"
+  },
+  {
+    "name": "🕊️🕊️.eth",
+    "norm": "🕊🕊.eth"
+  },
+  {
+    "name": "۳۰۰۰",
+    "norm": "٣٠٠٠"
+  },
+  {
+    "name": "۱۰۰۱",
+    "norm": "١٠٠١"
+  },
+  {
+    "name": "۲٤۲",
+    "norm": "٢٤٢"
+  },
+  {
+    "name": "۸۸۸۸۸",
+    "norm": "٨٨٨٨٨"
+  },
+  {
+    "name": "۰۷۷",
+    "norm": "٠۷۷"
+  },
+  {
+    "name": "٦۰۰٦",
+    "norm": "٦٠٠٦"
+  },
+  {
+    "name": "٠۷۸٦",
+    "norm": "٠۷٨٦"
+  },
+  {
+    "name": "۹٤۹",
+    "norm": "٩٤٩"
+  },
+  {
+    "name": "۸٨۰",
+    "norm": "٨٨٠"
+  },
+  {
+    "name": "٠٠٠۲",
+    "norm": "٠٠٠٢"
+  },
+  {
+    "name": "۵۰۰",
+    "norm": "۵٠٠"
+  },
+  {
+    "name": "۹۸۷",
+    "norm": "٩٨۷"
+  },
+  {
+    "name": "۹۰۹۰۹",
+    "norm": "٩٠٩٠٩"
+  },
+  {
+    "name": "۹۱۱",
+    "norm": "٩١١"
+  },
+  {
+    "name": "۷۲۷",
+    "norm": "۷٢۷"
+  },
+  {
+    "name": "۲۲۰",
+    "norm": "٢٢٠"
+  },
+  {
+    "name": "١١۹١١",
+    "norm": "١١٩١١"
+  },
+  {
+    "name": "۱۹۹۹",
+    "norm": "١٩٩٩"
+  },
+  {
+    "name": "۶۹۶۹",
+    "norm": "۶٩۶٩"
+  },
+  {
+    "name": "۱۴۷۱۴۷",
+    "norm": "١۴۷١۴۷"
+  },
+  {
+    "name": "☃️☃️",
+    "norm": "☃☃"
+  },
+  {
+    "name": "۹۷۱",
+    "norm": "٩۷١"
+  },
+  {
+    "name": "۹۲۳",
+    "norm": "٩٢٣"
+  },
+  {
+    "name": "۹۸۹۸",
+    "norm": "٩٨٩٨"
+  },
+  {
+    "name": "۹٦۹",
+    "norm": "٩٦٩"
+  },
+  {
+    "name": "🛰️🛰️",
+    "norm": "🛰🛰"
+  },
+  {
+    "name": "۰٦۰",
+    "norm": "٠٦٠"
+  },
+  {
+    "name": "۳۰۱",
+    "norm": "٣٠١"
+  },
+  {
+    "name": "۱۹۹۷",
+    "norm": "١٩٩۷"
+  },
+  {
+    "name": "۲۱٨",
+    "norm": "٢١٨"
+  },
+  {
+    "name": "۴۰۴",
+    "norm": "۴٠۴"
+  },
+  {
+    "name": "🦄️🦄🦄",
+    "norm": "🦄🦄🦄"
+  },
+  {
+    "name": "۰۸۹",
+    "norm": "٠٨٩"
+  },
+  {
+    "name": "٥١۹",
+    "norm": "٥١٩"
+  },
+  {
+    "name": "۳٥٦۹",
+    "norm": "٣٥٦٩"
+  },
+  {
+    "name": "۷۷۳",
+    "norm": "۷۷٣"
+  },
+  {
+    "name": "۱٤۹",
+    "norm": "١٤٩"
+  },
+  {
+    "name": "٣۹۱",
+    "norm": "٣٩١"
+  },
+  {
+    "name": "۷۸۷۸",
+    "norm": "۷٨۷٨"
+  },
+  {
+    "name": "۱۰۱",
+    "norm": "١٠١"
+  },
+  {
+    "name": "۰۰۰۰٦",
+    "norm": "٠٠٠٠٦"
+  },
+  {
+    "name": "۱٤٤۱",
+    "norm": "١٤٤١"
+  },
+  {
+    "name": "۸۳٤",
+    "norm": "٨٣٤"
+  },
+  {
+    "name": "۰۲۱",
+    "norm": "٠٢١"
+  },
+  {
+    "name": "☠️☠️☠️",
+    "norm": "☠☠☠"
+  },
+  {
+    "name": "Oculus-VR",
+    "norm": "oculus-vr"
+  },
+  {
+    "name": "۰۸٧",
+    "norm": "٠٨٧"
+  },
+  {
+    "name": "۸٦۸",
+    "norm": "٨٦٨"
+  },
+  {
+    "name": "i❤️tw",
+    "norm": "i❤tw"
+  },
+  {
+    "name": "۱۷۹",
+    "norm": "١۷٩"
+  },
+  {
+    "name": "۲۱۲",
+    "norm": "٢١٢"
+  },
+  {
+    "name": "۱۴۹",
+    "norm": "١۴٩"
+  },
+  {
+    "name": "۳۰۳",
+    "norm": "٣٠٣"
+  },
+  {
+    "name": "٦٥۹",
+    "norm": "٦٥٩"
+  },
+  {
+    "name": "٦۰٦",
+    "norm": "٦٠٦"
+  },
+  {
+    "name": "6️9️",
+    "norm": "69"
+  },
+  {
+    "name": "۹۱۹",
+    "norm": "٩١٩"
+  },
+  {
+    "name": "٥٤۳",
+    "norm": "٥٤٣"
+  },
+  {
+    "name": "٠٠٠٠۱",
+    "norm": "٠٠٠٠١"
+  },
+  {
+    "name": "۷۰۷",
+    "norm": "۷٠۷"
+  },
+  {
+    "name": "Фармасинтез",
+    "norm": "фармасинтез"
+  },
+  {
+    "name": "۷۷۹",
+    "norm": "۷۷٩"
+  },
+  {
+    "name": "۸۷۱",
+    "norm": "٨۷١"
+  },
+  {
+    "name": "۴۲۰",
+    "norm": "۴٢٠"
+  },
+  {
+    "name": "۱۷۷۱",
+    "norm": "١۷۷١"
+  },
+  {
+    "name": "۰٥۰",
+    "norm": "٠٥٠"
+  },
+  {
+    "name": "۳۳۳",
+    "norm": "٣٣٣"
+  },
+  {
+    "name": "۰۰۰۹",
+    "norm": "٠٠٠٩"
+  },
+  {
+    "name": "۰۳۳",
+    "norm": "٠٣٣"
+  },
+  {
+    "name": "۱۱۱۱۱",
+    "norm": "١١١١١"
+  },
+  {
+    "name": "٧٥۸",
+    "norm": "٧٥٨"
+  },
+  {
+    "name": "۱۰۱۰",
+    "norm": "١٠١٠"
+  },
+  {
+    "name": "۱۲۳٤٥",
+    "norm": "١٢٣٤٥"
+  },
+  {
+    "name": "۳۷۲",
+    "norm": "٣۷٢"
+  },
+  {
+    "name": "T-Mobile",
+    "norm": "t-mobile"
+  },
+  {
+    "name": "۱۰۰۰۰",
+    "norm": "١٠٠٠٠"
+  },
+  {
+    "name": "۰٥٥٥",
+    "norm": "٠٥٥٥"
+  },
+  {
+    "name": "۱۸۸۱",
+    "norm": "١٨٨١"
+  },
+  {
+    "name": "۸٠٠۸",
+    "norm": "٨٠٠٨"
+  },
+  {
+    "name": "🌬️🌬️",
+    "norm": "🌬🌬"
+  },
+  {
+    "name": "i❤️hk",
+    "norm": "i❤hk"
+  },
+  {
+    "name": "۰٤٤",
+    "norm": "٠٤٤"
+  },
+  {
+    "name": "۷۹۰",
+    "norm": "۷٩٠"
+  },
+  {
+    "name": "٤۰٤",
+    "norm": "٤٠٤"
+  },
+  {
+    "name": "۰۰۳۰",
+    "norm": "٠٠٣٠"
+  },
+  {
+    "name": "٦۱٦",
+    "norm": "٦١٦"
+  },
+  {
+    "name": "۴۰۴۰",
+    "norm": "۴٠۴٠"
+  },
+  {
+    "name": "۷۰۰۰",
+    "norm": "۷٠٠٠"
+  },
+  {
+    "name": "۰٥٤۹۹۹۹۹۹۹",
+    "norm": "٠٥٤٩٩٩٩٩٩٩"
+  },
+  {
+    "name": "۸۰٥",
+    "norm": "٨٠٥"
+  },
+  {
+    "name": "۱۰۰۰",
+    "norm": "١٠٠٠"
+  },
+  {
+    "name": "۴٠۹",
+    "norm": "۴٠٩"
+  },
+  {
+    "name": "۰٥۸۸۸۸۸۸۸۸",
+    "norm": "٠٥٨٨٨٨٨٨٨٨"
+  },
+  {
+    "name": "۷۷۱",
+    "norm": "۷۷١"
+  },
+  {
+    "name": "۹۵۱",
+    "norm": "٩۵١"
+  },
+  {
+    "name": "۷۸۸",
+    "norm": "۷٨٨"
+  },
+  {
+    "name": "۱۸۴",
+    "norm": "١٨۴"
+  },
+  {
+    "name": "۲۳۶",
+    "norm": "٢٣۶"
+  },
+  {
+    "name": "۹۷۳",
+    "norm": "٩۷٣"
+  },
+  {
+    "name": "☄️☄️",
+    "norm": "☄☄"
+  },
+  {
+    "name": "۱٠٠٠",
+    "norm": "١٠٠٠"
+  },
+  {
+    "name": "۲۳۴",
+    "norm": "٢٣۴"
+  },
+  {
+    "name": "۰۶۹",
+    "norm": "٠۶٩"
+  },
+  {
+    "name": "۶۹۶",
+    "norm": "۶٩۶"
+  },
+  {
+    "name": "۰۱۱",
+    "norm": "٠١١"
+  },
+  {
+    "name": "💎️💎️💎️",
+    "norm": "💎💎💎"
+  },
+  {
+    "name": "۳٤٥",
+    "norm": "٣٤٥"
+  },
+  {
+    "name": "٠٠٠٠۸",
+    "norm": "٠٠٠٠٨"
+  },
+  {
+    "name": "Nestlé",
+    "norm": "nestlé"
+  },
+  {
+    "name": "۰٤۰",
+    "norm": "٠٤٠"
+  },
+  {
+    "name": "۸۸۸۸",
+    "norm": "٨٨٨٨"
+  },
+  {
+    "name": "٥١٢۳",
+    "norm": "٥١٢٣"
+  },
+  {
+    "name": "۱۴۴",
+    "norm": "١۴۴"
+  },
+  {
+    "name": "٤۳۱",
+    "norm": "٤٣١"
+  },
+  {
+    "name": "⚜️⚜️",
+    "norm": "⚜⚜"
+  },
+  {
+    "name": "۱۱۰",
+    "norm": "١١٠"
+  },
+  {
+    "name": "۷۸٦۰",
+    "norm": "۷٨٦٠"
+  },
+  {
+    "name": "۸۰۱",
+    "norm": "٨٠١"
   },
   {
     "name": "⁠abc",
     "norm": "abc"
   },
   {
-    "name": "4444‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
+    "name": "٤۲۲",
+    "norm": "٤٢٢"
   },
   {
-    "name": "👯🏽‍♀",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۰۱۱۱",
+    "norm": "٠١١١"
   },
   {
-    "name": "💆‍♂‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۰۲٥",
+    "norm": "٠٢٥"
   },
   {
-    "name": "pizza‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
+    "name": "۸۸۷",
+    "norm": "٨٨۷"
   },
   {
-    "name": "1337‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۸۷٦",
+    "norm": "٨۷٦"
   },
   {
-    "name": "👨🏼‍👨🏼‍👦🏼‍👧🏼",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۱۸۰",
+    "norm": "١٨٠"
   },
   {
-    "name": "👨🏿‍❤‍👱‍♀",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "­­x",
+    "norm": "x"
   },
   {
-    "name": "‍‍m",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۰۰۰۰۰",
+    "norm": "٠٠٠٠٠"
   },
   {
-    "name": "🍄‍‍‍‍🍄‍‍‍‍🍄‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۷۹۵",
+    "norm": "۷٩۵"
   },
   {
-    "name": "👩🏻‍🤝‍🧑🏾",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۱۸۰۰",
+    "norm": "١٨٠٠"
   },
   {
-    "name": "002‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
+    "name": "۰٤٥",
+    "norm": "٠٤٥"
   },
   {
-    "name": "‍eth‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۱۱۸",
+    "norm": "١١٨"
   },
   {
-    "name": "www‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۲۱۱۲",
+    "norm": "٢١١٢"
   },
   {
-    "name": "8042‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۰۸٤",
+    "norm": "٠٨٤"
   },
   {
-    "name": "🍔‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۰۳۰",
+    "norm": "٠٣٠"
   },
   {
-    "name": "💰‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "٠٠۱",
+    "norm": "٠٠١"
   },
   {
-    "name": "❄‍‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۹۹٦",
+    "norm": "٩٩٦"
   },
   {
-    "name": "‍💯‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۰۰٦۹",
+    "norm": "٠٠٦٩"
   },
   {
-    "name": "999‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۲۲۱",
+    "norm": "٢٢١"
   },
   {
-    "name": "1‌2‌3",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
+    "name": "☠️☠️",
+    "norm": "☠☠"
   },
   {
-    "name": "‍‍🧟‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۸۰۰۸",
+    "norm": "٨٠٠٨"
   },
   {
-    "name": "elonm‍usk",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۱۳۳۷",
+    "norm": "١٣٣۷"
   },
   {
-    "name": "🏋‍♂‍🏋‍♂‍🏋‍♂‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۰۱۰۰",
+    "norm": "٠١٠٠"
   },
   {
-    "name": "000‌1",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
+    "name": "۰۱۲۳۴۵۶۷۸۹",
+    "norm": "٠١٢٣۴۵۶۷٨٩"
   },
   {
-    "name": "⠀⠀1",
-    "error": true,
-    "comment": "Disallowed codepoint: 2800"
+    "name": "۰۰۰۸",
+    "norm": "٠٠٠٨"
   },
   {
-    "name": "1114‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۷۸٦۸۷",
+    "norm": "۷٨٦٨۷"
   },
   {
-    "name": "phd‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
+    "name": "۱٤٥",
+    "norm": "١٤٥"
   },
   {
-    "name": "‌8899",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
+    "name": "۲۰۰۱",
+    "norm": "٢٠٠١"
   },
   {
-    "name": "fatapeclu‍b",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۸۲۸",
+    "norm": "٨٢٨"
   },
   {
-    "name": "👨🏻‍🤝‍👩🏿",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "٥٦۹",
+    "norm": "٥٦٩"
   },
   {
-    "name": "⠀⠀✍",
-    "error": true,
-    "comment": "Disallowed codepoint: 2800"
+    "name": "۰٩۰",
+    "norm": "٠٩٠"
   },
   {
-    "name": "abc‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۰۰۱۱",
+    "norm": "٠٠١١"
   },
   {
-    "name": "tencent‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
+    "name": "۰۰۱۰۰",
+    "norm": "٠٠١٠٠"
   },
   {
-    "name": "🤸‍♂‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "­420­",
+    "norm": "420"
   },
   {
-    "name": "samsung‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
+    "name": "❄️❄️",
+    "norm": "❄❄"
   },
   {
-    "name": "🐱‍💻🐱‍👓",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۲۰٦",
+    "norm": "٢٠٦"
   },
   {
-    "name": "5678‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
+    "name": "۷۸۹",
+    "norm": "۷٨٩"
   },
   {
-    "name": "beer‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "🍄‍‍‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‍‍‍31",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‍‍🎰",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👩‍👨‍👧‍👧",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👩‍👨‍👶",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "evm‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "eth‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "discusfish‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "🐋‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "1‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🤡🤡🤡‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‍rekt",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "nba‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "6‍9‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👩🏾‍‍💋‍❤‍💋‍👨🏿",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "9838‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "‌‌‌‌‌‌‌‌com",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "⠀google",
-    "error": true,
-    "comment": "Disallowed codepoint: 2800"
-  },
-  {
-    "name": "🍄‍‍‍‍‍🍄‍‍‍‍‍🍄‍‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🍆‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "CryptoPunk#1000",
-    "error": true,
-    "comment": "Disallowed codepoint: 23"
-  },
-  {
-    "name": "‍1524",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🐱‍🚀🐱‍🚀",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‍u‍w‍u‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "m‍eta",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "518‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "👯🏾‍♀",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🧍‍♂‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "d‍efi",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "ksi‍‍‍‍‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‌8888",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "binance‌‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "👨🏼‍❤",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "Vitalik Buterin",
-    "error": true,
-    "comment": "Disallowed codepoint: 20"
-  },
-  {
-    "name": "⠀⠀⠀⠀⠀⠀⠀",
-    "error": true,
-    "comment": "Disallowed codepoint: 2800"
-  },
-  {
-    "name": "🇮🇹‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "money‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "👩🏽‍❤‍👩",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "9888‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "‍🐵‍💎",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "1‍‍‍‍‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‍‍7",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‍祝‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🚀‍‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🎰‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "00‌7",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "🍕‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "19‌99",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "‍01",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "rmb‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "‍vatalik‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "usdc‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "🚀🐱‍🚀🚀",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🌙🦉‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👨‍👩‍👶",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "media‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "0‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "cyber‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "👨🏼‍👩🏼‍👦🏼",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👩🏿‍🤝‍🧑🏾",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "8⃣‍8⃣‍8⃣",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "wendao‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "nike‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "🖔‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "name": "۹۰۹",
+    "norm": "٩٠٩"
   },
   {
     "name": "🐱‍👤🐱‍💻🐱‍🚀",
@@ -12920,442 +13540,82 @@
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "‍👉👌",
+    "name": "🤑‍‍‍‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "2‍‍‍‍",
+    "name": "🤡‍🌏",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "🩵🩵🩵",
-    "error": true,
-    "comment": "Disallowed codepoint: 1fa75"
-  },
-  {
-    "name": "👩🏽‍❤‍🐶",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🙅‍♀‍🙅‍♀‍🙅‍♀‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👨🏽‍🤝‍👨🏽👨🏽‍🤝‍👨🏽👨🏽‍🤝‍👨🏽",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🧑🏼‍❤‍💋‍🧑🏼",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "8‌8‌8‌8‌",
+    "name": "admin‌",
     "error": true,
     "comment": "Disallowed codepoint: 200c"
   },
   {
-    "name": "‍秘‍",
+    "name": "[035d61312cd20dafbf47374f75d9987b445b2a8533f377ba1f0569889dbf0a21]",
+    "error": true,
+    "comment": "Disallowed codepoint: 5b"
+  },
+  {
+    "name": "🐱‍👤🐱‍👤",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "888‌‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "chain‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "👨🏽‍🤝‍👩🏻",
+    "name": "👩🏿‍🤝‍🧑🏻",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "⠀meta",
+    "name": "1‌‌‌69",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "⠀mywallet",
     "error": true,
     "comment": "Disallowed codepoint: 2800"
   },
   {
-    "name": "‍1111",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "e‌t‌h",
+    "name": "abcde‌",
     "error": true,
     "comment": "Disallowed codepoint: 200c"
   },
   {
-    "name": "⠀nft",
-    "error": true,
-    "comment": "Disallowed codepoint: 2800"
-  },
-  {
-    "name": "🏳%EF%B8%8F%E2%80%8D🌈",
-    "error": true,
-    "comment": "Disallowed codepoint: 25"
-  },
-  {
-    "name": "😲😲😲‍‍",
+    "name": "94‍‌‌‌‍24",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "🤩🤩🤩🤩🤩‍‍",
+    "name": "🚀🚀🚀‍‍‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "👩🏻‍❤‍👱‍♀",
+    "name": "‍‍3",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "‍🚀‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "4‍20",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🧛‍♀‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "666888‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👯🏻‍♂",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🤑🤑🤑‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‍owen",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👯🏿‍♀",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "😈‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👨🏻‍🤝‍👩🏾",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🧑‍🤝‍👩",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "d‍ick",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "1919‌",
+    "name": "‌0008",
     "error": true,
     "comment": "Disallowed codepoint: 200c"
   },
   {
-    "name": "😉😉😉‍‍",
+    "name": "👨🏼‍❤‍👩🏻",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "🧘‍♀‍",
+    "name": "🩷🩷🩷🩷🩷🩷🩷🩷",
     "error": true,
-    "comment": "Disallowed codepoint: 200d"
+    "comment": "Disallowed codepoint: 1fa77"
   },
   {
-    "name": "👨🏼‍🤝‍🧑🏾",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "888‌‌‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "🍆🍑‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🤡‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "ric‍h",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "@gmail",
-    "error": true,
-    "comment": "Disallowed codepoint: 40"
-  },
-  {
-    "name": "⠀❗⠀",
-    "error": true,
-    "comment": "Disallowed codepoint: 2800"
-  },
-  {
-    "name": "b‍‍‍‍oredapeyachtclub",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "elonmusk‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👨‍🤝‍👩",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "1998‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "🧙‍♀‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👽‌‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "👱‍♀‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👳‍♂‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🐉‍🐉🐉🐉🐉🐉🐉🐉",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🐻🐻🐻‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "💵‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‌btc",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "🇯🇵‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🚀‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🧜‍♂‍🧜‍♂‍🧜‍♂‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "4399‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "👨🏻‍❤‍💋‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "9999‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "‌‌🚀",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "literally⠀shaking",
-    "error": true,
-    "comment": "Disallowed codepoint: 2800"
-  },
-  {
-    "name": "💩‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👯🏾‍♂",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🦸‍♂‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‌paradigm",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "👨‍❤‍🐵",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🧑🏻‍❤‍🧑🏻",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🐱‍👓🔥",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "❤‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‌‌‌‌‌69",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "666‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👸🏽‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🐶‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‌bitcoin",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "eth‌‌‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "no‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "💰💰💰‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
-    "error": true,
-    "comment": "Disallowed codepoint: 2800"
-  },
-  {
-    "name": "🧑🏽‍❤‍🧑🏽",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "💲💲💲‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👩‍‍🏭",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "o‍k",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "ツ‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‍‍007",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "577‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "linux‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "‍‍❤‍‍",
+    "name": "🧜‍♀‍🧜‍♀‍🧜‍♀‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
@@ -13365,24 +13625,419 @@
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "‍8888",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "0000‌",
+    "name": "‌binance‌‌",
     "error": true,
     "comment": "Disallowed codepoint: 200c"
   },
   {
-    "name": "[01626f5a5c7a2123527dce0a49a04d319c7961b20c7727286d8fd15f43f5508f]",
+    "name": "‍‍8",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "pra‍nksy‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "668‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "👩🏽‍‍💋‍❤‍👨🏼",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🧔‍🧔‍🧔‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👽‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "‍vitalik‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍u‍w‍u‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🐵‍🐵‍🐵‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "usa‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍‍‍‍‍🐵‍‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🍄‍‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🤦‍♀‍🤦‍♀‍🤦‍♀‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🌚‌‌‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "👯🏿‍♂",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "5558‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "🤷‍♂‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "😱😱😱‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "de‍g‍‍en",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "⛹‍♀‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "m‍oney",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🧍‍♂‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "el‍on",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‌6666",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "👯🏾‍♂",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👮🏻‌‌‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "👑‍‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🍕‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "???",
+    "error": true,
+    "comment": "Disallowed codepoint: 3f"
+  },
+  {
+    "name": "   ",
+    "error": true,
+    "comment": "Disallowed codepoint: 20"
+  },
+  {
+    "name": "elonmusk‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "👮‍♂‍👮",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‌001",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "nba‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "eth⠀",
+    "error": true,
+    "comment": "Disallowed codepoint: 2800"
+  },
+  {
+    "name": "💎💎💎‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🇨🇦‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🎯‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "eth‌‌‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "no‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "x‌‌‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "⠀666",
+    "error": true,
+    "comment": "Disallowed codepoint: 2800"
+  },
+  {
+    "name": "web3‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "🧑🏻‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👩🏿‍❤‍👨",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "sushi‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "🐱‍💻",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👼‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "gm‌‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "moon‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "‍‍‍‍69",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🌈‍🌈‍🌈‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🧑🏼‍❤‍🧑🏼",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👨‍✈‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "9626‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "💀‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "[84d2c8a6179aea69271f1d500bbef7322d7619341512c07cc9d088f792ac1779]",
     "error": true,
     "comment": "Disallowed codepoint: 5b"
   },
   {
-    "name": "🙇‍♂‍",
+    "name": "🐙‍‍‍‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🐻🐻🐻‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "1122‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "🌕🦉‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👨🏻‍❤‍💋‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "niubi‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "capital‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "👩‍⚖‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🚵‍♀‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍🔥‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "8848‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "🧑🏼‍❤‍💋‍🧑🏼",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "4444‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "money‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "‍‍‍‍‍😂",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "sex‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "m‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "7‌4‌7‌4",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "[0418cda423bf231c73e68b475d6ca2b4306279eef66e899a8b24d76efaa0b2d7]",
+    "error": true,
+    "comment": "Disallowed codepoint: 5b"
+  },
+  {
+    "name": "‌vitalik",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "‌‌‌69",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "moonbird‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍‍‍‍‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "eth‌‌‌‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
   },
   {
     "name": "🏄‍♀‍",
@@ -13390,177 +14045,47 @@
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "👩🏼‍🤝‍👨🏼",
+    "name": "‍‍🪐🪐🪐",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "💪‍‍‍‍",
+    "name": "‍‍‍‍‍‍‍‍‍‍‍‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "‍meta",
+    "name": "🌹‍🙴‍💣",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "👨🏽‍🤝‍👩🏽",
+    "name": "‍g‍‍g",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "🇨🇳‍",
+    "name": "🍕‍🍕‍🍕",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "will‌",
+    "name": "😎m‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍‍1688",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "mobil‌",
     "error": true,
     "comment": "Disallowed codepoint: 200c"
   },
   {
-    "name": "1115‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "s⠀e⠀x",
-    "error": true,
-    "comment": "Disallowed codepoint: 2800"
-  },
-  {
-    "name": "8888‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "club‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "s&p500",
-    "error": true,
-    "comment": "Disallowed codepoint: 26"
-  },
-  {
-    "name": "👩🏼‍🤝‍👨",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "0001‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "🍆‍💦",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "⠀⠀8",
-    "error": true,
-    "comment": "Disallowed codepoint: 2800"
-  },
-  {
-    "name": "‍1024",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "94‍‌‌‌‍24",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
-    "error": true,
-    "comment": "Disallowed codepoint: 2800"
-  },
-  {
-    "name": "🐣‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "1024‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "🕱‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "©‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🤽‍♂‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👨🏼‍❤‍👱🏼‍♀",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "😵‍😵‍😵‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "pornhub‌",
-    "error": true,
-    "comment": "Disallowed codepoint: 200c"
-  },
-  {
-    "name": "🤣‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "gm‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‍🌹‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "👨‍⚕‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "cyber‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "‍123‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "art‍‍‍‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "🌶‍‍‍‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "1‍‍",
+    "name": "479‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
@@ -13570,87 +14095,692 @@
     "comment": "Disallowed codepoint: 5b"
   },
   {
-    "name": "🐵‍🐵‍🐵‍",
+    "name": "🐶‍‍‍‍‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "btc‍‍‍‍",
+    "name": "1‍‍‍‍‍‍‍‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "🐸‌‌",
+    "name": "‍‍🐵‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‌8899",
     "error": true,
     "comment": "Disallowed codepoint: 200c"
   },
   {
-    "name": "🧔‍♂‍",
+    "name": "‍‍bnb",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "👨‍👧‍👶",
+    "name": "🙍‍♀‍🙍‍♀‍🙍‍♀‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "bl‍‍‍‍ockchain",
+    "name": "america‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "‍🐵‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "a‍bc",
+    "name": "88‌88",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "10086‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "‍‍‍‍‍‍‍‍‍‍‍‍🐳",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "🤾‍♂‍",
+    "name": "👩🏽‍🤝‍👨🏽",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "b‍‍",
+    "name": "‌‌010",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "‍bayc‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "elon‍‍‍‍",
+    "name": "👨🏿‍🤝‍🧑🏿",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "m&m’s",
+    "name": "⠀google",
+    "error": true,
+    "comment": "Disallowed codepoint: 2800"
+  },
+  {
+    "name": "👨‍❤‍👩",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "⠀binance",
+    "error": true,
+    "comment": "Disallowed codepoint: 2800"
+  },
+  {
+    "name": "🤡‍‍‍‍🌍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "244‌‌‌‌‌‌‌‌‌‌‌‌2",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "sexy‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍🐵‍‍🐵‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🚨‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "💩‍💩‍💩",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🧙‍♀‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "0‌‌‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "tencentclub\u0000\u0000\u0000\u0000\u0000\u0000",
+    "error": true,
+    "comment": "Disallowed codepoint: 0"
+  },
+  {
+    "name": "‍✈‍✈‍✈",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🧑‍🤝‍👩",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🐱🐱🐱‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍💯‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👩‍👨‍👶‍👶",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "000‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "loan‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "8765‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "👨🏾‍👩🏾‍👧🏾‍👧🏾",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "#️#️#️",
+    "error": true,
+    "comment": "Disallowed codepoint: 23"
+  },
+  {
+    "name": "game‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "1337‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "1113‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "❤‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "bmw‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "‍x‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "😈‍‍😈‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‌007",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "⠀disney",
+    "error": true,
+    "comment": "Disallowed codepoint: 2800"
+  },
+  {
+    "name": "‍‍‍🙏🏿",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "ftx‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "bradly‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👩🏼‍❤‍💋‍👨",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "news‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "🇫🇷‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍‍‍‍ඞ",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "s&p500",
     "error": true,
     "comment": "Disallowed codepoint: 26"
   },
   {
-    "name": "🤑‍‍‍‍‍",
+    "name": "🧑🏿‍❤‍💋‍🧑🏿",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "6‍6‍6‍",
-    "error": true,
-    "comment": "Disallowed codepoint: 200d"
-  },
-  {
-    "name": "sean‌",
+    "name": "billgates‌",
     "error": true,
     "comment": "Disallowed codepoint: 200c"
   },
   {
-    "name": "🏴‍☠‍‍",
+    "name": "51‍‍‍‍‍‍6",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "🙆‍♂‍",
+    "name": "‼️‼️‼️",
+    "error": true,
+    "comment": "Disallowed codepoint: 203c"
+  },
+  {
+    "name": "⠀⠀⠀⠀⠀",
+    "error": true,
+    "comment": "Disallowed codepoint: 2800"
+  },
+  {
+    "name": "💝‍‍‍‍",
     "error": true,
     "comment": "Disallowed codepoint: 200d"
   },
   {
-    "name": "loan‌",
+    "name": "☠‍☠‍☠‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🚀‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👨🏽‍🤝‍🧑🏿",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🇪🇸‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🐱‍👓🐱‍👓🐱‍👓",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "3210‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "💂‍♂‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🐱‍🏍aaa",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👮‍♀‍👮‍♀‍👮‍♀‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "⠀eth",
+    "error": true,
+    "comment": "Disallowed codepoint: 2800"
+  },
+  {
+    "name": "Vitalik Buterin",
+    "error": true,
+    "comment": "Disallowed codepoint: 20"
+  },
+  {
+    "name": "===",
+    "error": true,
+    "comment": "Disallowed codepoint: 3d"
+  },
+  {
+    "name": "💁‍♂‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍rich",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🧞‍♀‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "a‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "ye‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "0x🐱‍👤",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‌☠‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "🔥🔥🔥‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍🎵🎵🎵",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍‍‍‍888",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🧙🏼‍♂‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "⠀crypto",
+    "error": true,
+    "comment": "Disallowed codepoint: 2800"
+  },
+  {
+    "name": "👩🏾‍🤝‍🧑🏼",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🤡‍🌎",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "8‌8‌8‌8‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "m‍eta",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "😂‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👩🏻‍❤‍👨",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👨‍❤‍💋‍👩",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🍄‍‍‍‍‍🍄‍‍‍‍‍🍄‍‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "eur‍o",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍james",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "002‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "👩🏿‍❤‍💋‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "garyvee‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "404‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "shit‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "‍134‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🏋‍♂‍🏋‍♂‍🏋‍♂‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "g‌od",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "⠀ex",
+    "error": true,
+    "comment": "Disallowed codepoint: 2800"
+  },
+  {
+    "name": "‍amazon",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍vitalik",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "o‍k",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🙍‍♂‍🙍‍♂‍🙍‍♂‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‌‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "###",
+    "error": true,
+    "comment": "Disallowed codepoint: 23"
+  },
+  {
+    "name": "🦀‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🧗‍♀‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "👩‍👦‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "god‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "8‍124",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🐳‌‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "‌😀‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "👯🏿‍♀",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "⠀6996",
+    "error": true,
+    "comment": "Disallowed codepoint: 2800"
+  },
+  {
+    "name": "ada‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍🐍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‍113‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🎃‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "tencentnews\u0000\u0000\u0000\u0000\u0000\u0000",
+    "error": true,
+    "comment": "Disallowed codepoint: 0"
+  },
+  {
+    "name": "pak‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "8875‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "⠀metamask",
+    "error": true,
+    "comment": "Disallowed codepoint: 2800"
+  },
+  {
+    "name": "🏳‍🟧‍⬛‍🟧",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "linux‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "crypto‌",
+    "error": true,
+    "comment": "Disallowed codepoint: 200c"
+  },
+  {
+    "name": "⚡⚡⚡‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🦹‍♀‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🚶‍♂‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "🐱‍🐉",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "💎🤚🏻‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "tencentcloud\u0000\u0000\u0000\u0000\u0000\u0000",
+    "error": true,
+    "comment": "Disallowed codepoint: 0"
+  },
+  {
+    "name": "😎‍‍‍‍‍‍‍😎‍‍‍‍‍‍‍😎‍‍‍‍‍‍‍",
+    "error": true,
+    "comment": "Disallowed codepoint: 200d"
+  },
+  {
+    "name": "‌🌕🌕🌕🌕",
     "error": true,
     "comment": "Disallowed codepoint: 200c"
   },

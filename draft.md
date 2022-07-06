@@ -64,7 +64,14 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 * [IDNA 2003](https://unicode.org/Public/idna/14.0.0/IdnaMappingTable.txt) with `UseSTD3ASCIIRules = true` and `Transitional_Processing = false`.
 * Alternative Stops `3002`, `FF0E`, and `FF61` are disallowed.
 * `200D (‍) ZWJ`, `200C (‌) ZWNJ`, `2800 (⠀) Braille Pattern Blank` are disallowed.
-* `0024 ($) Dollar Sign` and `005F (_) Underscore` are allowed.
+* `24 ($) Dollar Sign` and `5F (_) Underscore` are allowed.
+* Some [Arabic Numerals](https://en.wikipedia.org/wiki/Arabic_numerals) are mapped:
+	* `6F0 (۰)` &rarr; `660 (٠)`
+	* `6F1 (۱)` &rarr; `661 (١)`
+	* `6F2 (۲)` &rarr; `662 (٢)`
+	* `6F3 (۳)` &rarr; `663 (٣)`
+	* `6F8 (۸)` &rarr; `668 (٨)`
+	* `6F9 (۹)` &rarr; `669 (٩)`
 * All single-codepoint Emoji with default emoji presentation are disallowed.
 
 ### Derivation of `emoji.json`
@@ -78,7 +85,7 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 
 * 99.8% of names are still valid.
 * Only valid emoji sequences are allowed.
-* Only valid label separator is `002E (.) FULL STOP`.
+* Only valid label separator is `2E (.) FULL STOP`.
 * `200D (‍) ZWJ` can only appear in emoji sequences.
 * `200C (‌) ZWNJ` is disallowed.
 

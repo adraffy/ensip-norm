@@ -34,7 +34,7 @@ function consume_emoji(cps) {
 	while (pos < cps.length) {
 		let cp = cps[pos++];
 		if (cp == 0xFE0F) {
-			if (!fe0f) break; // we didn't expect can FE0F
+			if (!fe0f) break; // we didn't expect FE0F
 			fe0f = false; // clear flag
 			continue;
 		}
