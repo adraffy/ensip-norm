@@ -24,14 +24,15 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 
 ## Specification
 
-Normalization is the process of canonicalizing a name before for hashing.  It is idempotent: applying normalization multiple times produces the same result.  `emoji.json` and `valid.json` contain all of the necessary codepoint transformations.
+Normalization is the process of canonicalizing a name before for hashing.  It is idempotent: applying normalization multiple times produces the same result.  
+
+`emoji.json` and `valid.json` contain all of the necessary codepoint transformations.  NFC (Unicode Normalization Form C) has been stable since [Unicode 4.1](https://unicode.org/reports/tr15/#Stability_of_Normalized_Forms).
 
 ### Algorithm
 * Input is processed left-to-right on codepoints.
-* All whitespace codepoints are disallowed (see: `valid.json`).
-	* For user convenience, leading and trailing whitespace should be trimmed before normalization.
+* For user convenience, leading and trailing whitespace should be trimmed before normalization as all whitespace codepoints are disallowed.
 * Repeat [Processing](#Processing) until the input is consumed or a disallowed codepoint is encountered.
-* Apply [NFC (Unicode Normalization Form C)](https://unicode.org/reports/tr15/) to the output.
+* Apply [NFC](https://unicode.org/reports/tr15/) to the output.
 	* Warning: language-level NFC functions, like [`String.normalize()`](https://tc39.es/ecma262/multipage/text-processing.html#sec-string.prototype.normalize), may produce inconsistent results on different platforms.
 * The output is normalized and ready for hashing.
 
@@ -62,14 +63,21 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 ### Derivation of `chars.json`
 
 * [IDNA 2003](https://unicode.org/Public/idna/14.0.0/IdnaMappingTable.txt) with `UseSTD3ASCIIRules = true` and `Transitional_Processing = false`.
-* Alternative Stops `3002`, `FF0E`, and `FF61` are disallowed.
-* `200D (‍) ZWJ`, `200C (‌) ZWNJ`, `2800 (⠀) Braille Pattern Blank` are disallowed.
-* `24 ($) Dollar Sign` and `5F (_) Underscore` are allowed.
+* `24 ($) Dollar Sign` and `5F (_) Underscore` are valid.
+* The following are disallowed:
+	* `3002 (。) Ideographic Full Stop`
+	* `FF0E (．) Fullwidth Full Stop`
+	* `FF61 (｡) Halfwidth Ideographic Full Stop`
+	* `200C (‌) Zero Width Non-Joiner (ZWNJ)`
+	* `200D (‍) Zero Width joiner (ZWJ)`
+	* `2800 (⠀) Braille Pattern Blank`
+* `2013 (–) En Dash`, `2014 (—) Em Dash`, and `2212 (−) Minus Sign` are mapped to `2D (-) Hyphen`.
 * Some [Arabic Numerals](https://en.wikipedia.org/wiki/Arabic_numerals) are mapped:
 	* `6F0 (۰)` &rarr; `660 (٠)`
 	* `6F1 (۱)` &rarr; `661 (١)`
 	* `6F2 (۲)` &rarr; `662 (٢)`
 	* `6F3 (۳)` &rarr; `663 (٣)`
+	* `6F7 (۷)` &rarr; `667 (٧)`
 	* `6F8 (۸)` &rarr; `668 (٨)`
 	* `6F9 (۹)` &rarr; `669 (٩)`
 * All single-codepoint Emoji with default emoji presentation are disallowed.
@@ -86,12 +94,12 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 * 99.8% of names are still valid.
 * Only valid emoji sequences are allowed.
 * Only valid label separator is `2E (.) FULL STOP`.
-* `200D (‍) ZWJ` can only appear in emoji sequences.
-* `200C (‌) ZWNJ` is disallowed.
+* `ZWJ` can only appear in emoji sequences.
+* `ZWNJ` is disallowed.
 
 ## Security Considerations
 
-* Not all normalized names should be acceptible ENS names.  
+* Not all normalized names should be accepted ENS names.
 * This ENSIP only standardizes the process of normalization.  It does not address look-alike (confusable) characters.  
 * Example: `ape [61 70 65]` and `аре [430 440 435]` are both valid but visually indistinguishable. 
 
