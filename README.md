@@ -4,6 +4,9 @@
 
 ## Data Files 
 * [`chars.json`](./chars.json) &mdash; single-codepoint logic
+	* `valid` &mdash; set of valid codepoints: `[cp, ...]`
+	* `ignored` &mdash; set of ignored codepoints: `[cp, ...]`
+	* `mapped` &mdash; mapping from codepoint to codepoints: `[[cp, [cp, ...]], ...]`
 * [`emoji.json`](./emoji.json) &mdash; allowed emoji sequences
 * [`tests.json`](./tests.json) &mdash; validation tests
 
