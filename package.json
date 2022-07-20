@@ -1,7 +1,7 @@
 {
 	"name": "@adraffy/ensip-norm",
 	"version": "0.0.1",
-	"description": "ENSIP: ENS Name Normalization Standard",
+	"description": "ENS Name Normalization Standard",
 	"keywords": [
 	  "ENS",
 	  "Ethereum",
