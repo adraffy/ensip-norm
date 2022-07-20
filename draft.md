@@ -99,14 +99,13 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 
 ## Security Considerations
 
-* Not all normalized names should be accepted ENS names.
+* Not all normalized names are visually unambiguous.
 * This ENSIP only standardizes the process of normalization.  It does not address look-alike (confusable) characters.  
 * Example: `ape [61 70 65]` and `аре [430 440 435]` are both valid but visually indistinguishable. 
 
 ## Copyright
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
-
 
 ## Appendix: Reference Specifications
 
