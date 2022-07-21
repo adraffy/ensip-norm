@@ -20,3 +20,17 @@ Data files available as imports:
 ```Javascript
 import {VERSION, CHARS, EMOJI, TESTS} from '@adraffy/ensip-norm';
 ```
+
+Quickly run validation tests:
+
+```Javascript
+import {run_tests} from '@adraffy/ensip-norm';
+
+// mock function: string -> string
+function ens_normalize(name) {
+	return name.trim().toLowerCase();
+}
+
+// returns validation test failures
+let errors = run_tests(ens_normalize);
+```
