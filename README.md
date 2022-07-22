@@ -2,6 +2,11 @@
 
 [draft.md](./draft.md)
 
+## Javascript Implementations
+
+* Reference: [@adraffy/ens-norm-ref-impl.js](https://github.com/adraffy/ens-norm-ref-impl.js)
+* [@adraffy/ens-normalize.js](https://github.com/adraffy/ens-normalize.js)
+
 ## Data Files 
 * [`chars.json`](./chars.json) &mdash; single-codepoint logic
 	* `valid` &mdash; set of valid codepoints: `[cp, ...]`
@@ -28,7 +33,7 @@ import {run_tests} from '@adraffy/ensip-norm';
 
 // mock function: string -> string
 function ens_normalize(name) {
-	return name.trim().toLowerCase();
+	return name.trim().toLowerCase(); // toy example
 }
 
 // returns validation test failures
