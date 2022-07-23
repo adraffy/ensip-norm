@@ -15,27 +15,12 @@
 * [`emoji.json`](./emoji.json) &mdash; allowed emoji sequences
 * [`tests.json`](./tests.json) &mdash; validation tests
 
-## NPM
-
-```
-npm i @adraffy/ensip-norm
-```
 
 Data files available as imports:
 ```Javascript
-import {VERSION, CHARS, EMOJI, TESTS} from '@adraffy/ensip-norm';
+import {VERSION, CHARS, EMOJI, TESTS} from '@adraffy/ensip-norm'; // npm i @adraffy/ensip-norm
 ```
 
-Quickly run validation tests:
+## Build
 
-```Javascript
-import {run_tests} from '@adraffy/ensip-norm';
-
-// mock function: string -> string
-function ens_normalize(name) {
-	return name.trim().toLowerCase(); // toy example
-}
-
-// returns validation test failures
-let errors = run_tests(ens_normalize);
-```
+* `npm run build` &mdash; bake json files into `index.js`

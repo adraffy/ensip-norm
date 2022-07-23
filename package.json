@@ -1,28 +1,31 @@
 {
 	"name": "@adraffy/ensip-norm",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "ENS Name Normalization Standard Data Files",
 	"keywords": [
-	  "ENS",
-	  "Ethereum",
-	  "UTS-46",
-	  "UTS-51",
-	  "IDNA"
+		"ENS",
+		"Ethereum",
+		"UTS-46",
+		"UTS-51",
+		"IDNA"
 	],
 	"main": "index.js",
 	"type": "module",
 	"repository": {
-	  "type": "git",
-	  "url": "git+https://github.com/adraffy/ensip-norm.git"
+		"type": "git",
+		"url": "git+https://github.com/adraffy/ensip-norm.git"
 	},
 	"license": "CC0-1.0",
 	"bugs": {
-	  "url": "https://github.com/adraffy/ensip-norm/issues"
+		"url": "https://github.com/adraffy/ensip-norm/issues"
 	},
 	"homepage": "https://github.com/adraffy/ensip-norm#readme",
 	"author": {
-	  "name": "raffy.eth",
-	  "email": "raffy@me.com",
-	  "url": "http://raffy.antistupid.com"
+		"name": "raffy.eth",
+		"email": "raffy@me.com",
+		"url": "http://raffy.antistupid.com"
+	},
+	"scripts": {
+		"build": "node build.js"
 	}
-  }
+}

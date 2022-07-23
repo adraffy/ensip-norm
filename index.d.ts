@@ -11,10 +11,3 @@ export interface Test {
     error?: boolean
 }
 export const TESTS: Test[];
-
-export interface TestError extends Test {
-    type: string,
-    result: string
-}
-
-export function run_tests(fn: (name: string) => string, test?: Test[]): TestError[];
