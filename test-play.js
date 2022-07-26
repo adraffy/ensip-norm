@@ -1,4 +1,4 @@
-import {VERSION, CHARS, EMOJI, TESTS} from './index.js';
+import {VERSION, CHARS, EMOJI, TESTS, run_tests} from './index.js';
 
 console.log({
 	VERSION,
@@ -6,3 +6,5 @@ console.log({
 	EMOJI: EMOJI.length,
 	TESTS: TESTS.length
 });
+
+console.log(run_tests(x => x));
