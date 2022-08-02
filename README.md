@@ -17,7 +17,8 @@
 
 Data files available as imports:
 ```Javascript
-import {VERSION, CHARS, EMOJI, TESTS, run_tests} from '@adraffy/ensip-norm'; // npm i @adraffy/ensip-norm
+import {VERSION, CHARS, EMOJI, TESTS, run_tests} from '@adraffy/ensip-norm'; 
+// npm i @adraffy/ensip-norm
 
 // run validation tests
 // returns array of errors
