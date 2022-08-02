@@ -34,30 +34,26 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 * Repeat [Processing](#Processing) until the input is consumed or a disallowed codepoint is encountered.
 * Apply [NFC](https://unicode.org/reports/tr15/) to the output.
 	* Warning: language-level NFC functions, like [`String.normalize()`](https://tc39.es/ecma262/multipage/text-processing.html#sec-string.prototype.normalize), may produce inconsistent results on different platforms.
-* The output is normalized and ready for hashing.
+* The output is normalized and ready for [hashing](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#namehash-algorithm).
 
 ### Processing
 
 1. Find the longest emoji sequence that matches the remaining input.
-	* Valid emoji sequences can be found in `emoji.json`.  
-	* Any `FE0F` is optional during matching.
+	* Valid emoji sequences can be found in `emoji.json`
+	* `FE0F` is optional during matching.
 1. If an emoji sequence is found:
 	* Strip all `FE0F` from the matching emoji sequence and append it to the output.
-	* Remove the matched sequence from the input.
-	* Go to step 1
+	* Remove the matched sequence from the input and return.
 1. Determine the type of the leading codepoint.
 	* Types can be found in `chars.json`
 1. If `valid`:
-	* Remove the codepoint from the input
-	* Append the codepoint to the output
-	* Go to step 1
+	* Remove the codepoint from the input.
+	* Append the codepoint to the output and return.
 1. If `ignored`:
-	* Remove the codepoint from the input
-	* Go to step 1
+	* Remove the codepoint from the input and return.
 1. If `mapped`:
-	* Remove the codepoint from the input
-	* Append the mapped codepoints to the output
-	* Go to step 1
+	* Remove the codepoint from the input.
+	* Append the mapped codepoint(s) to the output and return.
 1. The codepoint is disallowed.
 
 ### Derivation of `chars.json`
@@ -95,7 +91,7 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 * Only valid emoji sequences are allowed.
 * Only valid label separator is `2E (.) FULL STOP`.
 * `ZWJ` can only appear in emoji sequences.
-* `ZWNJ` is disallowed.
+* `ZWNJ` is disallowed everywhere.
 
 ## Security Considerations
 
@@ -124,11 +120,11 @@ A list of [validation tests](./tests.json) are provided with the following inter
 * Need Normalization: `{name: "A", norm: "a"}` &rarr; `normalize("A") = "a"`
 * Expect Error: `{name: "@", error: true}` &rarr; `normalize("@") throws`
 
-## Appendix: Beautification
+## Appendix: Pretty Formatting
 
 * Follow the normalization algorithm, except:
-	* When an emoji sequence is matched, output the full matching emoji sequence (don't strip `FE0F`).
-* Example: `normalize("1️⃣") = "1⃣"` &rarr; `beautify("1⃣") = "1️⃣"`
+	* When an emoji sequence is matched, output the full emoji sequence (don't strip `FE0F`).
+* Example: `normalize("1️⃣") = "1⃣"` &rarr; `pretty("1⃣") = "1️⃣"`
 
 ## Appendix: Emoji Sequence Whitelist
 
