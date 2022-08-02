@@ -43,18 +43,18 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `FE0F` is optional during matching.
 1. If an emoji sequence is found:
 	* Strip all `FE0F` from the matching emoji sequence and append it to the output.
-	* Remove the matched sequence from the input and return.
-1. Determine the type of the leading codepoint.
+	* Remove the matched sequence from the input.
+1. Otherwise, determine the type of the leading codepoint. 
 	* Types can be found in `chars.json`
 1. If `valid`:
 	* Remove the codepoint from the input.
-	* Append the codepoint to the output and return.
+	* Append the codepoint to the output.
 1. If `ignored`:
-	* Remove the codepoint from the input and return.
+	* Remove the codepoint from the input.
 1. If `mapped`:
 	* Remove the codepoint from the input.
-	* Append the mapped codepoint(s) to the output and return.
-1. The codepoint is disallowed.
+	* Append the mapped codepoint(s) to the output.
+1. Otherwise, the codepoint is disallowed.
 
 ### Derivation of `chars.json`
 
