@@ -2,10 +2,14 @@
 
 [draft.md](./draft.md)
 
-## Javascript Implementations
+## Implementations
 
+### Javascript 
 * Reference: [@adraffy/ens-norm-ref-impl](https://github.com/adraffy/ens-norm-ref-impl.js)
 * Optimized: [@adraffy/ens-normalize](https://github.com/adraffy/ens-normalize.js)
+
+### Solidity
+* Experimental: [@adraffy/ens-norm-research](https://github.com/adraffy/ens-norm-research)
 
 ## Data Files 
 * [`chars.json`](./chars.json) &mdash; single-codepoint logic
@@ -27,4 +31,4 @@ let errors = run_tests(name => name.toLowerCase());
 
 ## Build
 
-* `npm run build` &mdash; bake json files into `index.js`
+* `npm run build` &mdash; compile data files into `index.js`
