@@ -132,11 +132,11 @@ A list of [validation tests](./tests.json) are provided with the following inter
 * Need Normalization: `{name: "A", norm: "a"}` &rarr; `normalize("A") = "a"`
 * Expect Error: `{name: "@", error: true}` &rarr; `normalize("@") throws`
 
-## Appendix: Pretty Formatting
+## Appendix: Beautify
 
 * Follow the normalization algorithm, except:
 	* When an emoji sequence is matched, output the full emoji sequence (don't strip `FE0F`).
-* Example: `normalize("1️⃣") = "1⃣"` &rarr; `pretty("1⃣") = "1️⃣"`
+* Example: `normalize("1️⃣") = "1⃣"` &rarr; `beautify("1⃣") = "1️⃣"`
 
 ## Appendix: Emoji Sequence Whitelist
 
