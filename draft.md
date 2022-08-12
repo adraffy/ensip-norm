@@ -67,7 +67,19 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `200C (‌) Zero Width Non-Joiner (ZWNJ)`
 	* `200D (‍) Zero Width joiner (ZWJ)`
 	* `2800 (⠀) Braille Pattern Blank`
-* `2013 (–) En Dash`, `2014 (—) Em Dash`, and `2212 (−) Minus Sign` are mapped to `2D (-) Hyphen`.
+* The following are mapped to `2D (-) Hyphen`:
+	* `2010 (‐) Hyphen`
+	* `2011 (‑) Non-Breaking Hyphen`
+	* `2012 (‒) Figure Dash`
+	* `2013 (–) En Dash`
+	* `2014 (—) Em Dash`
+	* `2015 (—) Horizontal Bar`
+	* `207B (⁻) Superscript Minus`
+	* `208B (₋) Subscript Minus`
+	* `2212 (−) Minus Sign`
+	* `FE31 (︱) Vertical Em Dash`
+	* `FE32 (︲) Vertical En Dash`
+	* `FE58 (﹘) Small Em Dash`
 * Some [Arabic Numerals](https://en.wikipedia.org/wiki/Arabic_numerals) are mapped:
 	* `6F0 (۰)` &rarr; `660 (٠)`
 	* `6F1 (۱)` &rarr; `661 (١)`

@@ -1,15 +1,15 @@
-import {readFile, writeFile} from 'node:fs/promises';
+import {readFileSync, writeFileSync} from 'node:fs';
 
-async function read(path) {
-	return JSON.parse(await readFile(new URL(path, import.meta.url)));
+function read(path) {
+	return JSON.parse(readFileSync(new URL(path, import.meta.url)));
 }
 
-const TESTS = await read('./tests.json');
+const TESTS = read('./tests.json');
 
 let map = {
-	VERSION: (await read('./package.json')).version,
-	CHARS: await read('./chars.json'),
-	EMOJI: await read('./emoji.json'),
+	VERSION: read('./package.json').version,
+	CHARS: read('./chars.json'),
+	EMOJI: read('./emoji.json'),
 	TESTS
 };
 
@@ -34,9 +34,8 @@ function run_tests(fn, tests = TESTS) {
 	return errors;
 }
 
-
 let out_file = new URL('index.js', import.meta.url);
-writeFile(out_file, [
+writeFileSync(out_file, [
 	`// built: ${new Date().toJSON()}`,
 	...Object.entries(map).map(([k, v]) =>  `export const ${k} = ${JSON.stringify(v)};`),
 	`export ${run_tests}`,
