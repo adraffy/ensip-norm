@@ -37,7 +37,6 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 * For each label in the output:
 	* `5F (_) Underscore` can only occur at the start of each label.
 	* The 3rd and 4th characters cannot both be `2D (-) Hyphen` if the label contains only ASCII (`0x00`—`0x7F`).
-	
 * The output is normalized and ready for [hashing](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#namehash-algorithm).
 
 ### Processing
