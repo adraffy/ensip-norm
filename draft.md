@@ -34,6 +34,10 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 * Repeat [Processing](#Processing) until the input is consumed or a disallowed codepoint is encountered.
 * Apply [NFC](https://unicode.org/reports/tr15/) to the output.
 	* Warning: language-level NFC functions, like [`String.normalize()`](https://tc39.es/ecma262/multipage/text-processing.html#sec-string.prototype.normalize), may produce inconsistent results on different platforms.
+* For each label in the output:
+	* `5F (_) Underscore` can only occur at the start of each label.
+	* The 3rd and 4th characters cannot both be `2D (-) Hyphen` if the label contains only ASCII (`0x00`—`0x7F`).
+	
 * The output is normalized and ready for [hashing](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#namehash-algorithm).
 
 ### Processing
