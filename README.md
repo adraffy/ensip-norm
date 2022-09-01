@@ -13,10 +13,11 @@
 
 ## Data Files 
 * [`chars.json`](./chars.json) &mdash; single-codepoint logic
-	* `valid` &mdash; set of valid codepoints: `[cp, ...]`
-	* `ignored` &mdash; set of ignored codepoints: `[cp, ...]`
-	* `mapped` &mdash; mapping from codepoint to codepoints: `[[cp, [cp, ...]], ...]`
-* [`emoji.json`](./emoji.json) &mdash; allowed emoji sequences
+	* `valid` &mdash; list of valid codepoints
+	* `mapped` &mdash; list of codepoint to mapped codepoint(s): `[cp, [cp, ...]`
+	* `ignored` &mdash; list of ignored codepoints
+	* `cm` &mdash; list of combining mark codepoints (subset of valid)
+* [`emoji.json`](./emoji.json) &mdash; fully-qualified emoji sequences
 * [`tests.json`](./tests.json) &mdash; validation tests
 
 Data files available as imports:

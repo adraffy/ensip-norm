@@ -1,6 +1,6 @@
 {
 	"name": "@adraffy/ensip-norm",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "ENS Name Normalization Standard Data Files",
 	"keywords": [
 		"ENS",

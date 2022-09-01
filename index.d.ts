@@ -1,7 +1,8 @@
 export const CHARS: {
 	valid: number[],
 	ignored: number[],
-	mapped: [number, number[]][]
+	mapped: [number, number[]][],
+	cm: number[]
 };
 export const EMOJI: number[][];
 export interface Test {

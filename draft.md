@@ -4,6 +4,7 @@
 | ----------- | ------------------------------------ |
 | **Status**  | Draft                                |
 | **Created** | 2022-07-04                           |
+| **Updated** | 2022-09-01                           |
 
 ## Abstract
 
@@ -17,26 +18,28 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 * [UTS-46](https://unicode.org/reports/tr46/) is insufficient to normalize emoji sequences. Correct emoji processing is only possible with [UTS-51](https://www.unicode.org/reports/tr51/).
 * Validation tests are needed to ensure implementation compliance.
 * The success of ENS has encouraged spoofing via the following techniques:
-	1. Insertion of zero-width characters
-	1. Using names which normalize differently between available algorithms 
-	1. Using names which render differently between platforms
-	1. Replacement of look-alike (confusable) characters
+	1. Insertion of zero-width characters.
+	1. Using names which normalize differently between available algorithms. 
+	1. Using names which render differently between platforms.
+	1. Replacement of look-alike (confusable) characters.
 
 ## Specification
 
-Normalization is the process of canonicalizing a name before for hashing.  It is idempotent: applying normalization multiple times produces the same result.  
+Normalization is the process of canonicalizing a name before for hashing.  It is idempotent: applying normalization multiple times produces the same result.
 
-`emoji.json` and `valid.json` contain all of the necessary codepoint transformations.  NFC (Unicode Normalization Form C) has been stable since [Unicode 4.1](https://unicode.org/reports/tr15/#Stability_of_Normalized_Forms).
+### Versioning
+* `chars.json` and `emoji.json` contain all of the necessary codepoint information for [Processing](#Processing).
+* [Unicode Normalization Forms](https://unicode.org/reports/tr15/) should use Unicode version `14.0.0` for correct results.
 
 ### Algorithm
 * Input is processed left-to-right on codepoints.
-* For user convenience, leading and trailing whitespace should be trimmed before normalization as all whitespace codepoints are disallowed.
+* For user convenience, leading and trailing whitespace should be trimmed before normalization, as all whitespace codepoints are disallowed.
 * Repeat [Processing](#Processing) until the input is consumed or a disallowed codepoint is encountered.
-* Apply [NFC](https://unicode.org/reports/tr15/) to the output.
-	* Warning: language-level NFC functions, like [`String.normalize()`](https://tc39.es/ecma262/multipage/text-processing.html#sec-string.prototype.normalize), may produce inconsistent results on different platforms.
-* For each label in the output:
-	* `5F (_) Underscore` can only occur at the start of each label.
-	* The 3rd and 4th characters cannot both be `2D (-) Hyphen` if the label contains only ASCII (`0x00`—`0x7F`).
+* Convert the output to NFC (Unicode Normalization Form C).
+* For each [label](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#name-syntax) in the output:
+	* `5F (_) Underscore` can only occur at the start of the label.
+	* The third and fourth characters cannot both be `2D (-) Hyphen` if the label contains only ASCII (`0x00-0x7F`).
+	* When the label is converted to NFD (Unicode Normalization Form D), combining marks (see: `"cm"` in `chars.json`) cannot be: the first character, directly follow an emoji, or directly follow another combining mark.
 * The output is normalized and ready for [hashing](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#namehash-algorithm).
 
 ### Processing
@@ -62,7 +65,15 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 ### Derivation of `chars.json`
 
 * [IDNA 2003](https://unicode.org/Public/idna/14.0.0/IdnaMappingTable.txt) with `UseSTD3ASCIIRules = true` and `Transitional_Processing = false`.
-* `24 ($) Dollar Sign` and `5F (_) Underscore` are valid.
+	* `"ignored"` → list of codepoints
+	* `"valid"` → list of codepoints
+	* `"mapped"` → list of codepoint to mapped codepoint(s)
+* [Combining Marks](https://www.unicode.org/Public/14.0.0/ucd/extracted/DerivedGeneralCategory.txt) (`General_Category = Mark`) that are `valid`.
+	* `"cm"` → list of codepoints
+* All single-codepoint emoji from `emoji.json` are removed.
+* The following are valid:
+	* `24 ($) Dollar Sign` 
+	* `5F (_) Underscore`
 * The following are disallowed:
 	* `3002 (。) Ideographic Full Stop`
 	* `FF0E (．) Fullwidth Full Stop`
@@ -70,6 +81,14 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `200C (‌) Zero Width Non-Joiner (ZWNJ)`
 	* `200D (‍) Zero Width joiner (ZWJ)`
 	* `2800 (⠀) Braille Pattern Blank`
+* The following combining marks are disallowed:
+	* `320 (x̠) Combining Minus Sign Below`
+	* `332 (x̲) Combining Low Line`
+	* `333 (x̳) Combining Double Low Line`
+	* `347 (x͇) Combining Equals Sign Below`
+	* `FE2B (x︫) Combining Macron Left Half Below`
+	* `FE2C (x︬) Combining Macron Right Half Below`
+	* `FE2D (x︭) Combining Conjoining Macron Below`
 * The following are mapped to `2D (-) Hyphen`:
 	* `2010 (‐) Hyphen`
 	* `2011 (‑) Non-Breaking Hyphen`
@@ -91,28 +110,65 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `6F7 (۷)` &rarr; `667 (٧)`
 	* `6F8 (۸)` &rarr; `668 (٨)`
 	* `6F9 (۹)` &rarr; `669 (٩)`
-* All single-codepoint Emoji with default emoji presentation are disallowed.
 
 ### Derivation of `emoji.json`
 
+* All emoji are [fully-qualified](https://www.unicode.org/reports/tr51/#def_fully_qualified_emoji).
 * [Emoji Sequence Whitelist](#appendix-emoji-sequence-whitelist)
-* All [RGI ZWJ sequences](https://unicode.org/Public/emoji/14.0/emoji-zwj-sequences.txt)
-* All [single-codepoint Emoji](https://unicode.org/Public/14.0.0/ucd/emoji/emoji-data.txt) with [default emoji presentation](https://www.unicode.org/reports/tr51/#Presentation_Style). 
-* All single-codepoint emoji with default text presentation are not included.
+* The following [ZWJ Sequences](https://unicode.org/Public/emoji/14.0/emoji-zwj-sequences.txt):
+	* `RGI_Emoji_ZWJ_Sequence`
+* The following [Emoji Sequences](https://unicode.org/Public/emoji/14.0/emoji-sequences.txt):
+	* `Emoji_Keycap_Sequence`
+	* `RGI_Emoji_Tag_Sequence`
+	* `RGI_Emoji_Modifier_Sequence`
+* The following single-codepoint [Emoji](https://unicode.org/Public/14.0.0/ucd/emoji/emoji-data.txt):
+	* Default [emoji-presentation](https://www.unicode.org/reports/tr51/#Presentation_Style) are included as `<CP> FE0F`.
+* The following emoji are mapped by IDNA 2003 and removed:
+	* `2122 (™) Trade Mark`
+	* `2139 (ℹ️) Information`
+	* `24C2 (Ⓜ️) Circled M`
+	* `3297 (㊗️) Japanese "Congratulations" Button`
+	* `3299 (㊙️) Japanese "Secret" Button`
+	* `1F201 (🈁) Japanese "Here" Button`
+	* `1F202 (🈂️) Japanese "Service Charge" Button`
+	* `1F21A (🈚) Japanese "Free of Charge" Button`
+	* `1F22F (🈯) Japanese "Reserved" Button`
+	* `1F232 (🈲) Japanese "Prohibited" Button`
+	* `1F233 (🈳) Japanese "Vacancy" Button`
+	* `1F234 (🈴) Japanese "Passing Grade" Button`
+	* `1F235 (🈵) Japanese "No Vacancy" Button`
+	* `1F236 (🈶) Japanese "Not Free of Charge" Button`
+	* `1F237 (🈷) Japanese "Monthly Amount" Button`
+	* `1F238 (🈸) Japanese "Application" Button`
+	* `1F239 (🈹) Japanese "Discount" Button`
+	* `1F23A (🈺) Japanese "Open for Business" Button`
+	* `1F250 (🉐) Japanese "Bargain" Button`
+	* `1F251 (🉑) Japanese "Acceptable" Button`
+* The following emoji are removed (and disallowed from `chars.json`)
+	* `203C (‼️) Double Exclamation Mark`
+	* `2049 (⁉️) Exclamation Question Mark`
 
 ## Backwards Compatibility
 
 * 99.8% of names are still valid.
 * Only valid emoji sequences are allowed.
 * Only valid label separator is `2E (.) FULL STOP`.
-* `ZWJ` can only appear in emoji sequences.
-* `ZWNJ` is disallowed everywhere.
+* `ZWJ` can **only** appear in emoji sequences.
+* `ZWNJ` is disallowed **everywhere**.
 
 ## Security Considerations
 
 * Not all normalized names are visually unambiguous.
-* This ENSIP only standardizes the process of normalization.  It does not address look-alike (confusable) characters.  
-* Example: `ape [61 70 65]` and `аре [430 440 435]` are both valid but visually indistinguishable. 
+* Unicode presentation varies between platforms.
+	* Unsupported Emoji ZWJ Sequences are visually indistinguishable from their unjoined forms.
+	* [Regional Indicators](https://www.unicode.org/reports/tr51/#Flags) may not combine into a Flag Sequence when separated by an `FE0F`.
+* This ENSIP does not address [confusable](https://www.unicode.org/reports/tr39/) characters.
+	* Single-script confusables:
+		* Example: `a [61]` and `ɑ [251]`
+	* Whole-script confusables:
+		* Example: `ape [61 70 65]` and `аре [430 440 435]`
+	* Emoji confusables: 
+		* Example: `🚴🏻 [1F6B4 1F3FB]` and `🚴🏼 [1F6B4 1F3FC]` 
 
 ## Copyright
 
@@ -135,28 +191,16 @@ A list of [validation tests](./tests.json) are provided with the following inter
 * Need Normalization: `{name: "A", norm: "a"}` &rarr; `normalize("A") = "a"`
 * Expect Error: `{name: "@", error: true}` &rarr; `normalize("@") throws`
 
-## Appendix: Beautify
-
-* Follow the normalization algorithm, except:
-	* When an emoji sequence is matched, output the full emoji sequence (don't strip `FE0F`).
-* Example: `normalize("1️⃣") = "1⃣"` &rarr; `beautify("1⃣") = "1️⃣"`
-
 ## Appendix: Emoji Sequence Whitelist
 
 ```Javascript
 [
-	// tag sequences
-	'1F3F4 E0067 E0062 E0065 E006E E0067 E007F', // 🏴󠁧󠁢󠁥󠁮󠁧󠁿
-	'1F3F4 E0067 E0062 E0073 E0063 E0074 E007F', // 🏴󠁧󠁢󠁳󠁣󠁴󠁿
-	'1F3F4 E0067 E0062 E0077 E006C E0073 E007F', // 🏴󠁧󠁢󠁷󠁬󠁳󠁿
-
 	// men wrestling
 	'1F93C 1F3FB 200D 2642 FE0F', // 🤼🏻‍♂
 	'1F93C 1F3FC 200D 2642 FE0F', // 🤼🏼‍♂
 	'1F93C 1F3FD 200D 2642 FE0F', // 🤼🏽‍♂
 	'1F93C 1F3FE 200D 2642 FE0F', // 🤼🏾‍♂
 	'1F93C 1F3FF 200D 2642 FE0F', // 🤼🏿‍♂
-
 	// women wrestling
 	'1F93C 1F3FB 200D 2640 FE0F', // 🤼🏻‍♀
 	'1F93C 1F3FC 200D 2640 FE0F', // 🤼🏼‍♀
@@ -165,3 +209,17 @@ A list of [validation tests](./tests.json) are provided with the following inter
 	'1F93C 1F3FF 200D 2640 FE0F', // 🤼🏿‍♀
 ]
 ```
+
+## Annex: Additional Implementation Notes
+
+### Name Beautification
+
+Follow the normalization algorithm, except when an emoji sequence is matched, output the full emoji sequence (don't strip `FE0F`).
+* Example: `normalize("1️⃣") = "1⃣"` &rarr; `beautify("1⃣") = "1️⃣"`
+
+### Normalized Fragments
+
+To test if a `fragment` is contained in a `name`:
+* Normalize the `name` and convert it to NFD.
+* Only [process](#Processing) the `fragment` and convert it to NFD.
+* Check for containment.
