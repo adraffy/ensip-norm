@@ -52,15 +52,15 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* Remove the matched sequence from the input.
 1. Otherwise, determine the type of the leading codepoint. 
 	* Types can be found in `chars.json`
-1. If `valid`:
+1. If **valid**:
 	* Remove the codepoint from the input.
 	* Append the codepoint to the output.
-1. If `ignored`:
+1. If **ignored**:
 	* Remove the codepoint from the input.
-1. If `mapped`:
+1. If **mapped**:
 	* Remove the codepoint from the input.
 	* Append the mapped codepoint(s) to the output.
-1. Otherwise, the codepoint is disallowed.
+1. Otherwise, the codepoint is **disallowed**.
 
 ### Derivation of `chars.json`
 
@@ -68,20 +68,20 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `"ignored"` → list of codepoints
 	* `"valid"` → list of codepoints
 	* `"mapped"` → list of codepoint to mapped codepoint(s)
-* [Combining Marks](https://www.unicode.org/Public/14.0.0/ucd/extracted/DerivedGeneralCategory.txt) (`General_Category = Mark`) that are `valid`.
+* [Combining Marks](https://www.unicode.org/Public/14.0.0/ucd/extracted/DerivedGeneralCategory.txt) (`General_Category = Mark`) that are **valid**.
 	* `"cm"` → list of codepoints
-* All single-codepoint emoji from `emoji.json` are removed.
-* The following are valid:
+* All single-codepoint emoji from `emoji.json` are **removed**.
+* The following are **valid**:
 	* `24 ($) Dollar Sign` 
 	* `5F (_) Underscore`
-* The following are disallowed:
+* The following are **disallowed**:
 	* `3002 (。) Ideographic Full Stop`
 	* `FF0E (．) Fullwidth Full Stop`
 	* `FF61 (｡) Halfwidth Ideographic Full Stop`
 	* `200C (‌) Zero Width Non-Joiner (ZWNJ)`
 	* `200D (‍) Zero Width joiner (ZWJ)`
 	* `2800 (⠀) Braille Pattern Blank`
-* The following combining marks are disallowed:
+* The following combining marks are **disallowed**:
 	* `320 (x̠) Combining Minus Sign Below`
 	* `332 (x̲) Combining Low Line`
 	* `333 (x̳) Combining Double Low Line`
@@ -89,7 +89,7 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `FE2B (x︫) Combining Macron Left Half Below`
 	* `FE2C (x︬) Combining Macron Right Half Below`
 	* `FE2D (x︭) Combining Conjoining Macron Below`
-* The following are mapped to `2D (-) Hyphen`:
+* The following are **mapped** to `2D (-) Hyphen`:
 	* `2010 (‐) Hyphen`
 	* `2011 (‑) Non-Breaking Hyphen`
 	* `2012 (‒) Figure Dash`
@@ -108,7 +108,7 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `FE31 (︱) Vertical Em Dash`
 	* `FE32 (︲) Vertical En Dash`
 	* `FE58 (﹘) Small Em Dash`
-* Some [Arabic Numerals](https://en.wikipedia.org/wiki/Arabic_numerals) are mapped:
+* Some [Arabic Numerals](https://en.wikipedia.org/wiki/Arabic_numerals) are **mapped**:
 	* `6F0 (۰)` &rarr; `660 (٠)`
 	* `6F1 (۱)` &rarr; `661 (١)`
 	* `6F2 (۲)` &rarr; `662 (٢)`
@@ -128,9 +128,9 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `RGI_Emoji_Tag_Sequence`
 	* `RGI_Emoji_Modifier_Sequence`
 * The following single-codepoint [Emoji](https://unicode.org/Public/14.0.0/ucd/emoji/emoji-data.txt):
-	* Default [emoji-presentation](https://www.unicode.org/reports/tr51/#Presentation_Style) are included as `<CP> FE0F`
-		* Exception: [Regional Indicators](https://www.unicode.org/reports/tr51/#Flags) are included as `<CP>`
-* The following emoji are mapped by IDNA 2003 and removed:
+ 	* Default text-presentation and [Regional Indicators](https://www.unicode.org/reports/tr51/#Flags)
+	* Default [emoji-presentation](https://www.unicode.org/reports/tr51/#Presentation_Style) are paired with `FE0F`
+* The following emoji are mapped by IDNA 2003 and must be **removed**:
 	* `2122 (™) Trade Mark`
 	* `2139 (ℹ️) Information`
 	* `24C2 (Ⓜ️) Circled M`
@@ -151,13 +151,13 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `1F23A (🈺) Japanese "Open for Business" Button`
 	* `1F250 (🉐) Japanese "Bargain" Button`
 	* `1F251 (🉑) Japanese "Acceptable" Button`
-* The following emoji are removed (and disallowed from `chars.json`)
+* The following emoji are **removed** (and **disallowed** from `chars.json`)
 	* `203C (‼️) Double Exclamation Mark`
 	* `2049 (⁉️) Exclamation Question Mark`
 
 ## Backwards Compatibility
 
-* 99.8% of names are still valid.
+* 99.5% of names are still valid.
 * Only valid emoji sequences are allowed.
 * Only valid label separator is `2E (.) FULL STOP`.
 * `ZWJ` can **only** appear in emoji sequences.
@@ -168,14 +168,14 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 * Not all normalized names are visually unambiguous.
 * Unicode presentation can varies between platforms.
 	* Unsupported Emoji ZWJ Sequences are visually indistinguishable from their unjoined forms.
-	* Adjacent [Regional Indicators](https://www.unicode.org/reports/tr51/#Flags) may combine into a Flag Sequence.
+	* Adjacent [Regional Indicators](https://www.unicode.org/reports/tr51/#Flag_Presentation) may combine into a [Flag Sequence](https://www.unicode.org/reports/tr51/#Flags).
 * This ENSIP does not address [confusable](https://www.unicode.org/reports/tr39/) characters.
 	* Single-script confusables:
-		* Example: `a [61]` and `ɑ [251]`
+		* eg. `a [61]` and `ɑ [251]`
 	* Whole-script confusables:
-		* Example: `ape [61 70 65]` and `аре [430 440 435]`
+		* eg. `ape [61 70 65]` and `аре [430 440 435]`
 	* Emoji confusables: 
-		* Example: `🚴🏻 [1F6B4 1F3FB]` and `🚴🏼 [1F6B4 1F3FC]` 
+		* eg. `🚴🏻 [1F6B4 1F3FB]` and `🚴🏼 [1F6B4 1F3FC]` 
 
 ## Copyright
 
@@ -221,12 +221,12 @@ A list of [validation tests](./tests.json) are provided with the following inter
 
 ### Name Beautification
 
-Follow the normalization algorithm, except when an emoji sequence is matched, output the full emoji sequence (don't strip `FE0F`).
-* Example: `normalize("1️⃣") = "1⃣"` &rarr; `beautify("1⃣") = "1️⃣"`
+Follow the normalization algorithm, except when an emoji sequence is matched, output the full emoji sequence—don't strip `FE0F`.
+* eg. `normalize("1️⃣") = "1⃣"` &rarr; `beautify("1⃣") = "1️⃣"`
 
 ### Normalized Fragments
 
 To test if a `fragment` is contained in a `name`:
-1. Normalize the `name` and convert it to NFD.
-1. Only [process](#Processing) the `fragment` and convert it to NFD.
+1. [Normalize](#algorithm) the `name` and convert to NFD.
+1. Only [process](#processing) the `fragment` and convert to NFD.
 1. Check for containment.
