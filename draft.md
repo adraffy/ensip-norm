@@ -166,7 +166,7 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 ## Security Considerations
 
 * Not all normalized names are visually unambiguous.
-* Unicode presentation can varies between platforms.
+* Unicode presentation can vary between platforms.
 	* Unsupported Emoji ZWJ Sequences are visually indistinguishable from their unjoined forms.
 	* Adjacent [Regional Indicators](https://www.unicode.org/reports/tr51/#Flag_Presentation) may combine into a [Flag Sequence](https://www.unicode.org/reports/tr51/#Flags).
 * This ENSIP does not address [confusable](https://www.unicode.org/reports/tr39/) characters.
