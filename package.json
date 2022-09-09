@@ -1,6 +1,6 @@
 {
 	"name": "@adraffy/ensip-norm",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "ENS Name Normalization Standard Data Files",
 	"keywords": [
 		"ENS",
@@ -9,8 +9,9 @@
 		"UTS-51",
 		"IDNA"
 	],
-	"main": "index.js",
 	"type": "module",
+	"main": "index.js",
+	"files": ["chars.json", "emoji.json", "tests.json", "*.d.ts"],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/adraffy/ensip-norm.git"

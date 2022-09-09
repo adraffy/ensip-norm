@@ -4,7 +4,7 @@
 | ----------- | ------------------------------------ |
 | **Status**  | Draft                                |
 | **Created** | 2022-07-04                           |
-| **Updated** | 2022-09-01                           |
+| **Updated** | 2022-09-08                           |
 
 ## Abstract
 
@@ -99,6 +99,12 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `207B (⁻) Superscript Minus`
 	* `208B (₋) Subscript Minus`
 	* `2212 (−) Minus Sign`
+	* `23AF (⎯) Horizontal Line Extension`
+	* `23BA (⎺) Horizontal Scan Line-1`
+	* `23BB (⎻) Horizontal Scan Line-2`
+	* `23BC (⎼) Horizontal Scan Line-3`
+	* `23BD (⎽) Horizontal Scan Line-4`
+	* `23E4 (⏤) Straightness`
 	* `FE31 (︱) Vertical Em Dash`
 	* `FE32 (︲) Vertical En Dash`
 	* `FE58 (﹘) Small Em Dash`
@@ -113,7 +119,7 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 
 ### Derivation of `emoji.json`
 
-* All emoji are [fully-qualified](https://www.unicode.org/reports/tr51/#def_fully_qualified_emoji).
+* All emoji are [fully-qualified](https://www.unicode.org/reports/tr51/#def_fully_qualified_emoji) unless specified.
 * [Emoji Sequence Whitelist](#appendix-emoji-sequence-whitelist)
 * The following [ZWJ Sequences](https://unicode.org/Public/emoji/14.0/emoji-zwj-sequences.txt):
 	* `RGI_Emoji_ZWJ_Sequence`
@@ -122,7 +128,8 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `RGI_Emoji_Tag_Sequence`
 	* `RGI_Emoji_Modifier_Sequence`
 * The following single-codepoint [Emoji](https://unicode.org/Public/14.0.0/ucd/emoji/emoji-data.txt):
-	* Default [emoji-presentation](https://www.unicode.org/reports/tr51/#Presentation_Style) are included as `<CP> FE0F`.
+	* Default [emoji-presentation](https://www.unicode.org/reports/tr51/#Presentation_Style) are included as `<CP> FE0F`
+		* Exception: [Regional Indicators](https://www.unicode.org/reports/tr51/#Flags) are included as `<CP>`
 * The following emoji are mapped by IDNA 2003 and removed:
 	* `2122 (™) Trade Mark`
 	* `2139 (ℹ️) Information`
@@ -159,9 +166,9 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 ## Security Considerations
 
 * Not all normalized names are visually unambiguous.
-* Unicode presentation varies between platforms.
+* Unicode presentation can varies between platforms.
 	* Unsupported Emoji ZWJ Sequences are visually indistinguishable from their unjoined forms.
-	* [Regional Indicators](https://www.unicode.org/reports/tr51/#Flags) may not combine into a Flag Sequence when separated by an `FE0F`.
+	* Adjacent [Regional Indicators](https://www.unicode.org/reports/tr51/#Flags) may combine into a Flag Sequence.
 * This ENSIP does not address [confusable](https://www.unicode.org/reports/tr39/) characters.
 	* Single-script confusables:
 		* Example: `a [61]` and `ɑ [251]`
@@ -220,6 +227,6 @@ Follow the normalization algorithm, except when an emoji sequence is matched, ou
 ### Normalized Fragments
 
 To test if a `fragment` is contained in a `name`:
-* Normalize the `name` and convert it to NFD.
-* Only [process](#Processing) the `fragment` and convert it to NFD.
-* Check for containment.
+1. Normalize the `name` and convert it to NFD.
+1. Only [process](#Processing) the `fragment` and convert it to NFD.
+1. Check for containment.

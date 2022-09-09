@@ -7,4 +7,4 @@ console.log({
 	TESTS: TESTS.length
 });
 
-console.log(run_tests(x => x.toLowerCase()));
+run_tests(x => x.toLowerCase()); 
