@@ -1,6 +1,6 @@
 # ENS Name Normalization Standard
 
-[Current Standard (Draft)](https://github.com/adraffy/ensip-norm/draft.md)
+[Current Standard (Draft)](./draft.md)
 
 ## Implementations
 
