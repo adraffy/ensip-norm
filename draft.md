@@ -161,8 +161,8 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `2013 (–) EN DASH`
 	* `2014 (—) EM DASH`
 	* `2015 (―) HORIZONTAL BAR`
-	* `2042 (⁂) ASTERISM`
 	* `2027 (‧) HYPHENATION POINT`
+	* `2043 (⁃) HYPHEN BULLET`
 	* `207B (⁻) SUPERSCRIPT MINUS`
 	* `208B (₋) SUBSCRIPT MINUS`
 	* `2212 (−) MINUS SIGN`
@@ -211,7 +211,7 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `3299 (㊙) CIRCLED IDEOGRAPH SECRET`
 	* `1F201 (🈁) SQUARED KATAKANA KOKO`
 	* `1F202 (🈂) SQUARED KATAKANA SA`
-	* `1F21A (🈚) SQUARED CJK UNIFIED IDEOGRAPH-7121`
+	* `1F21A (🈚) SQUARED CJK UNIFIED IDEOGRAPH-7121` 
 	* `1F22F (🈯) SQUARED CJK UNIFIED IDEOGRAPH-6307`
 	* `1F232 (🈲) SQUARED CJK UNIFIED IDEOGRAPH-7981`
 	* `1F233 (🈳) SQUARED CJK UNIFIED IDEOGRAPH-7A7A`
