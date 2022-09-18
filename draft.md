@@ -4,7 +4,7 @@
 | ----------- | ------------------------------------ |
 | **Status**  | Draft                                |
 | **Created** | 2022-07-04                           |
-| **Updated** | 2022-09-08                           |
+| **Updated** | 2022-09-18                           |
 
 ## Abstract
 
@@ -12,7 +12,7 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 
 ## Motivation
 
-* Since ENSIP-1 was finalized in 2016, Unicode has [evolved](https://unicode.org/history/publicationdates.html) from version 8.0.0 to 14.0.0 and incorporated many new characters, including complex emoji sequences. 
+* Since ENSIP-1 was finalized in 2016, Unicode has [evolved](https://unicode.org/history/publicationdates.html) from version 8.0.0 to 15.0.0 and incorporated many new characters, including complex emoji sequences. 
 * ENSIP-1 does not state the version of Unicode.
 * ENSIP-1 implies but does not state an explicit flavor of IDNA processing. 
 * [UTS-46](https://unicode.org/reports/tr46/) is insufficient to normalize emoji sequences. Correct emoji processing is only possible with [UTS-51](https://www.unicode.org/reports/tr51/).
@@ -28,30 +28,35 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 Normalization is the process of canonicalizing a name before for hashing.  It is idempotent: applying normalization multiple times produces the same result.
 
 ### Versioning
-* `chars.json` and `emoji.json` contain all of the necessary codepoint information for [Processing](#Processing).
-* [Unicode Normalization Forms](https://unicode.org/reports/tr15/) should use Unicode version `14.0.0` for correct results.
+* Unicode version `15.0.0`
+* [chars.json](https://github.com/adraffy/ens-normalize.js/tree/main/derive/output/chars.json) and [emoji.json](https://github.com/adraffy/ens-normalize.js/tree/main/derive/output/emoji.json) have all of the necessary data for [Processing](#Processing)
+* [nf.json](https://github.com/adraffy/ens-normalize.js/tree/main/derive/output/nf.json) has all the necessary data for [Unicode Normalization Forms](https://unicode.org/reports/tr15/)
+
 
 ### Algorithm
 * Input is processed left-to-right on codepoints.
 * For user convenience, leading and trailing whitespace should be trimmed before normalization, as all whitespace codepoints are disallowed.
-* Repeat [Processing](#Processing) until the input is consumed or a disallowed codepoint is encountered.
-* Convert the output to NFC (Unicode Normalization Form C).
-* For each [label](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#name-syntax) in the output:
-	* `5F (_) Underscore` can only occur at the start of the label.
-	* The third and fourth characters cannot both be `2D (-) Hyphen` if the label contains only ASCII (`0x00-0x7F`).
-	* When the label is converted to NFD (Unicode Normalization Form D), combining marks (see: `"cm"` in `chars.json`) cannot be: the first character, directly follow an emoji, or directly follow another combining mark.
-* The output is normalized and ready for [hashing](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#namehash-algorithm).
+* It is not recommended to remove ignored characters before processing as emoji appearance can change significantly.
+
+1. Repeat [Processing](#Processing) until the input is consumed or a disallowed codepoint is encountered.
+1. Convert the output to NFC (Unicode Normalization Form C).
+1. For each [label](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#name-syntax) in the output:
+	1. `5F (_) LOW LINE` can only occur at the start of the label.
+	1. The third and fourth characters cannot both be `2D (-) HYPHEN-MINUS` if the label contains only ASCII (`0x00-0x7F`).
+	1. `2019 (’) RIGHT SINGLE QUOTATION MARK` cannot be: the first character, last character, or directly follow another.
+	1. When the label is converted to NFD (Unicode Normalization Form D), combining marks cannot be: the first character, directly follow an emoji, or directly follow another combining mark.
+1. The output is normalized and ready for [hashing](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#namehash-algorithm).
 
 ### Processing
 
 1. Find the longest emoji sequence that matches the remaining input.
-	* Valid emoji sequences can be found in `emoji.json`
+	* Valid emoji sequences can be found in [emoji.json](#derivation-of-emojijson)
 	* `FE0F` is optional during matching.
 1. If an emoji sequence is found:
 	* Strip all `FE0F` from the matching emoji sequence and append it to the output.
 	* Remove the matched sequence from the input.
 1. Otherwise, determine the type of the leading codepoint. 
-	* Types can be found in `chars.json`
+	* Types can be found in [chars.json](#derivation-of-charsjson)
 1. If **valid**:
 	* Remove the codepoint from the input.
 	* Append the codepoint to the output.
@@ -64,96 +69,161 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 
 ### Derivation of `chars.json`
 
-* [IDNA 2003](https://unicode.org/Public/idna/14.0.0/IdnaMappingTable.txt) with `UseSTD3ASCIIRules = true` and `Transitional_Processing = false`.
+* [Precomputed data file](https://github.com/adraffy/ens-normalize.js/tree/main/derive/output)
 	* `"ignored"` → list of codepoints
 	* `"valid"` → list of codepoints
 	* `"mapped"` → list of codepoint to mapped codepoint(s)
-* [Combining Marks](https://www.unicode.org/Public/14.0.0/ucd/extracted/DerivedGeneralCategory.txt) (`General_Category = Mark`) that are **valid**.
-	* `"cm"` → list of codepoints
-* All single-codepoint emoji from `emoji.json` are **removed**.
+	* `"cm"` → list of [Combining Mark](https://www.unicode.org/Public/15.0.0/ucd/extracted/DerivedGeneralCategory.txt) codepoints that are **valid**.
+* [IDNA 2003](https://unicode.org/Public/idna/15.0.0/IdnaMappingTable.txt)
+ 	* `UseSTD3ASCIIRules = true`
+	* `Transitional_Processing = false`
+	* `CheckBidi = false`
+	* `CheckJoiners = false` (see: [Algorithm](#algorithm), step 3)
+	* The following deviations are valid:
+		* `DF (ß) LATIN SMALL LETTER SHARP S`
+		* `3C2 (ς) GREEK SMALL LETTER FINAL SIGMA`
+* All non-ASCII [emoji and extended pictographic](https://www.unicode.org/reports/tr51/#Emoji_Characters) characters are **disallowed**.
 * The following are **valid**:
-	* `24 ($) Dollar Sign` 
-	* `5F (_) Underscore`
+	* `24 ($) DOLLAR SIGN`
+	* `5F (_) LOW LINE`
 * The following are **disallowed**:
-	* `3002 (。) Ideographic Full Stop`
-	* `FF0E (．) Fullwidth Full Stop`
-	* `FF61 (｡) Halfwidth Ideographic Full Stop`
-	* `200C (‌) Zero Width Non-Joiner (ZWNJ)`
-	* `200D (‍) Zero Width joiner (ZWJ)`
-	* `2800 (⠀) Braille Pattern Blank`
+	* `200C (‌) ZERO WIDTH NON-JOINER (ZWNJ)`
+	* `200D (‍) ZERO WIDTH JOINER (ZWJ)`
+	* `2800 (⠀) BRAILLE PATTERN BLANK`
+	* `3002 (。) IDEOGRAPHIC FULL STOP`
+	* `FF0E (．) FULLWIDTH FULL STOP`
+	* `FF61 (｡) HALFWIDTH IDEOGRAPHIC FULL STOP`
 * The following combining marks are **disallowed**:
-	* `320 (x̠) Combining Minus Sign Below`
-	* `332 (x̲) Combining Low Line`
-	* `333 (x̳) Combining Double Low Line`
-	* `347 (x͇) Combining Equals Sign Below`
-	* `FE2B (x︫) Combining Macron Left Half Below`
-	* `FE2C (x︬) Combining Macron Right Half Below`
-	* `FE2D (x︭) Combining Conjoining Macron Below`
-* The following are **mapped** to `2D (-) Hyphen`:
-	* `2010 (‐) Hyphen`
-	* `2011 (‑) Non-Breaking Hyphen`
-	* `2012 (‒) Figure Dash`
-	* `2013 (–) En Dash`
-	* `2014 (—) Em Dash`
-	* `2015 (—) Horizontal Bar`
-	* `207B (⁻) Superscript Minus`
-	* `208B (₋) Subscript Minus`
-	* `2212 (−) Minus Sign`
-	* `23AF (⎯) Horizontal Line Extension`
-	* `23BA (⎺) Horizontal Scan Line-1`
-	* `23BB (⎻) Horizontal Scan Line-2`
-	* `23BC (⎼) Horizontal Scan Line-3`
-	* `23BD (⎽) Horizontal Scan Line-4`
-	* `23E4 (⏤) Straightness`
-	* `FE31 (︱) Vertical Em Dash`
-	* `FE32 (︲) Vertical En Dash`
-	* `FE58 (﹘) Small Em Dash`
-* Some [Arabic Numerals](https://en.wikipedia.org/wiki/Arabic_numerals) are **mapped**:
-	* `6F0 (۰)` &rarr; `660 (٠)`
-	* `6F1 (۱)` &rarr; `661 (١)`
-	* `6F2 (۲)` &rarr; `662 (٢)`
-	* `6F3 (۳)` &rarr; `663 (٣)`
-	* `6F7 (۷)` &rarr; `667 (٧)`
-	* `6F8 (۸)` &rarr; `668 (٨)`
-	* `6F9 (۹)` &rarr; `669 (٩)`
+	* `320 (x̠) COMBINING MINUS SIGN BELOW`
+	* `332 (x̲) COMBINING LOW LINE`
+	* `333 (x̳) COMBINING DOUBLE LOW LINE`
+	* `347 (x͇) COMBINING EQUALS SIGN BELOW`
+	* `FE2B (x︫) COMBINING MACRON LEFT HALF BELOW`
+	* `FE2C (x︬) COMBINING MACRON RIGHT HALF BELOW`
+	* `FE2D (x︭) COMBINING CONJOINING MACRON BELOW`
+* The following punctuation are **disallowed**:
+	* `2016 (‖) DOUBLE VERTICAL LINE`
+	* `2018 (‘) LEFT SINGLE QUOTATION MARK`
+	* `201A (‚) SINGLE LOW-9 QUOTATION MARK`
+	* `201B (‛) SINGLE HIGH-REVERSED-9 QUOTATION MARK`
+	* `201C (“) LEFT DOUBLE QUOTATION MARK`
+	* `201D (”) RIGHT DOUBLE QUOTATION MARK`
+	* `201E („) DOUBLE LOW-9 QUOTATION MARK`
+	* `201F (‟) DOUBLE HIGH-REVERSED-9 QUOTATION MARK`
+	* `2020 (†) DAGGER`
+	* `2021 (‡) DOUBLE DAGGER`
+	* `2023 (‣) TRIANGULAR BULLET`
+	* `2030 (‰) PER MILLE SIGN`
+	* `2031 (‱) PER TEN THOUSAND SIGN`
+	* `2032 (′) PRIME`
+	* `2033 (″) DOUBLE PRIME`
+	* `2034 (‴) TRIPLE PRIME`
+	* `2035 (‵) REVERSED PRIME`
+	* `2036 (‶) REVERSED DOUBLE PRIME`
+	* `2037 (‷) REVERSED TRIPLE PRIME`
+	* `2038 (‸) CARET`
+	* `2039 (‹) SINGLE LEFT-POINTING ANGLE QUOTATION MARK`
+	* `203A (›) SINGLE RIGHT-POINTING ANGLE QUOTATION MARK`
+	* `203D (‽) INTERROBANG`
+	* `2040 (⁀) CHARACTER TIE`
+	* `2041 (⁁) CARET INSERTION POINT`
+	* `2045 (⁅) LEFT SQUARE BRACKET WITH QUILL`
+	* `2046 (⁆) RIGHT SQUARE BRACKET WITH QUILL`
+	* `204A (⁊) TIRONIAN SIGN ET`
+	* `204B (⁋) REVERSED PILCROW SIGN`
+	* `204C (⁌) BLACK LEFTWARDS BULLET`
+	* `204D (⁍) BLACK RIGHTWARDS BULLET`
+	* `204E (⁎) LOW ASTERISK`
+	* `204F (⁏) REVERSED SEMICOLON`
+	* `2050 (⁐) CLOSE UP`
+	* `2051 (⁑) TWO ASTERISKS ALIGNED VERTICALLY`
+	* `2052 (⁒) COMMERCIAL MINUS SIGN`
+	* `2053 (⁓) SWUNG DASH`
+	* `2055 (⁕) FLOWER PUNCTUATION MARK`
+	* `2056 (⁖) THREE DOT PUNCTUATION`
+	* `2057 (⁗) QUADRUPLE PRIME`
+	* `2058 (⁘) FOUR DOT PUNCTUATION`
+	* `2059 (⁙) FIVE DOT PUNCTUATION`
+	* `205A (⁚) TWO DOT PUNCTUATION`
+	* `205B (⁛) FOUR DOT MARK`
+	* `205D (⁝) TRICOLON`
+	* `205E (⁞) VERTICAL FOUR DOTS`
+	* `23DC (⏜) TOP PARENTHESIS`
+	* `23DD (⏝) BOTTOM PARENTHESIS`
+	* `23DE (⏞) TOP CURLY BRACKET`
+	* `23DF (⏟) BOTTOM CURLY BRACKET`
+	* `23E0 (⏠) TOP TORTOISE SHELL BRACKET`
+	* `23E1 (⏡) BOTTOM TORTOISE SHELL BRACKET`
+* The following are **mapped** to `2D (-) HYPHEN-MINUS`:
+	* `2010 (‐) HYPHEN`
+	* `2011 (‑) NON-BREAKING HYPHEN`
+	* `2012 (‒) FIGURE DASH`
+	* `2013 (–) EN DASH`
+	* `2014 (—) EM DASH`
+	* `2015 (―) HORIZONTAL BAR`
+	* `2042 (⁂) ASTERISM`
+	* `2027 (‧) HYPHENATION POINT`
+	* `207B (⁻) SUPERSCRIPT MINUS`
+	* `208B (₋) SUBSCRIPT MINUS`
+	* `2212 (−) MINUS SIGN`
+	* `23AF (⎯) HORIZONTAL LINE EXTENSION`
+	* `23BA (⎺) HORIZONTAL SCAN LINE-1`
+	* `23BB (⎻) HORIZONTAL SCAN LINE-3`
+	* `23BC (⎼) HORIZONTAL SCAN LINE-7`
+	* `23BD (⎽) HORIZONTAL SCAN LINE-9`
+	* `23E4 (⏤) STRAIGHTNESS`
+	* `FE31 (︱) PRESENTATION FORM FOR VERTICAL EM DASH`
+	* `FE32 (︲) PRESENTATION FORM FOR VERTICAL EN DASH`
+	* `FE58 (﹘) SMALL EM DASH`
+* Some [Extended Arabic Numerals](https://en.wikipedia.org/wiki/Arabic_numerals) are **mapped**:
+	* `6F0 (۰)` &rarr; `660 (٠) ARABIC-INDIC DIGIT ZERO`
+	* `6F1 (۱)` &rarr; `661 (١) ARABIC-INDIC DIGIT ONE`
+	* `6F2 (۲)` &rarr; `662 (٢) ARABIC-INDIC DIGIT TWO`
+	* `6F3 (۳)` &rarr; `663 (٣) ARABIC-INDIC DIGIT THREE`
+	* `6F7 (۷)` &rarr; `667 (٧) ARABIC-INDIC DIGIT SEVEN`
+	* `6F8 (۸)` &rarr; `668 (٨) ARABIC-INDIC DIGIT EIGHT`
+	* `6F9 (۹)` &rarr; `669 (٩) ARABIC-INDIC DIGIT NINE`
+* `27 (') APOSTROPHE` is **mapped** to `2019 (’) RIGHT SINGLE QUOTATION MARK`
+* All characters (valid or mapped) that decompose (NFD) into adjacent codepoints are **disallowed**.
 
 ### Derivation of `emoji.json`
 
+* [Precomputed data file](https://github.com/adraffy/ens-normalize.js/tree/main/derive/output)
+	* list of codepoint sequences
 * All emoji are [fully-qualified](https://www.unicode.org/reports/tr51/#def_fully_qualified_emoji) unless specified.
 * [Emoji Sequence Whitelist](#appendix-emoji-sequence-whitelist)
-* The following [ZWJ Sequences](https://unicode.org/Public/emoji/14.0/emoji-zwj-sequences.txt):
+* [Emoji Sequence Blacklist](#appendix-emoji-sequence-blacklist) are **removed**.
+* The following [ZWJ Sequences](https://unicode.org/Public/emoji/15.0/emoji-zwj-sequences.txt):
 	* `RGI_Emoji_ZWJ_Sequence`
-* The following [Emoji Sequences](https://unicode.org/Public/emoji/14.0/emoji-sequences.txt):
+* The following [Emoji Sequences](https://unicode.org/Public/emoji/15.0/emoji-sequences.txt):
 	* `Emoji_Keycap_Sequence`
 	* `RGI_Emoji_Tag_Sequence`
 	* `RGI_Emoji_Modifier_Sequence`
-* The following single-codepoint [Emoji](https://unicode.org/Public/14.0.0/ucd/emoji/emoji-data.txt):
- 	* Default text-presentation and [Regional Indicators](https://www.unicode.org/reports/tr51/#Flags)
-	* Default [emoji-presentation](https://www.unicode.org/reports/tr51/#Presentation_Style) are paired with `FE0F`
+* The following [emoji and extended pictographic](https://unicode.org/Public/15.0.0/ucd/emoji/emoji-data.txt) characters:
+	* `Emoji_Presentation` are paired with `FE0F`
+		* Except [Regional Indicators](https://www.unicode.org/reports/tr51/#Flags)
+ 	* All remaining non-ASCII `Emoji`
 * The following emoji are mapped by IDNA 2003 and must be **removed**:
-	* `2122 (™) Trade Mark`
-	* `2139 (ℹ️) Information`
-	* `24C2 (Ⓜ️) Circled M`
-	* `3297 (㊗️) Japanese "Congratulations" Button`
-	* `3299 (㊙️) Japanese "Secret" Button`
-	* `1F201 (🈁) Japanese "Here" Button`
-	* `1F202 (🈂️) Japanese "Service Charge" Button`
-	* `1F21A (🈚) Japanese "Free of Charge" Button`
-	* `1F22F (🈯) Japanese "Reserved" Button`
-	* `1F232 (🈲) Japanese "Prohibited" Button`
-	* `1F233 (🈳) Japanese "Vacancy" Button`
-	* `1F234 (🈴) Japanese "Passing Grade" Button`
-	* `1F235 (🈵) Japanese "No Vacancy" Button`
-	* `1F236 (🈶) Japanese "Not Free of Charge" Button`
-	* `1F237 (🈷) Japanese "Monthly Amount" Button`
-	* `1F238 (🈸) Japanese "Application" Button`
-	* `1F239 (🈹) Japanese "Discount" Button`
-	* `1F23A (🈺) Japanese "Open for Business" Button`
-	* `1F250 (🉐) Japanese "Bargain" Button`
-	* `1F251 (🉑) Japanese "Acceptable" Button`
-* The following emoji are **removed** (and **disallowed** from `chars.json`)
-	* `203C (‼️) Double Exclamation Mark`
-	* `2049 (⁉️) Exclamation Question Mark`
+	* `2122 (™) TRADE MARK SIGN`
+	* `2139 (ℹ) INFORMATION SOURCE`
+	* `24C2 (Ⓜ) CIRCLED LATIN CAPITAL LETTER M`
+	* `3297 (㊗) CIRCLED IDEOGRAPH CONGRATULATION`
+	* `3299 (㊙) CIRCLED IDEOGRAPH SECRET`
+	* `1F201 (🈁) SQUARED KATAKANA KOKO`
+	* `1F202 (🈂) SQUARED KATAKANA SA`
+	* `1F21A (🈚) SQUARED CJK UNIFIED IDEOGRAPH-7121`
+	* `1F22F (🈯) SQUARED CJK UNIFIED IDEOGRAPH-6307`
+	* `1F232 (🈲) SQUARED CJK UNIFIED IDEOGRAPH-7981`
+	* `1F233 (🈳) SQUARED CJK UNIFIED IDEOGRAPH-7A7A`
+	* `1F234 (🈴) SQUARED CJK UNIFIED IDEOGRAPH-5408`
+	* `1F235 (🈵) SQUARED CJK UNIFIED IDEOGRAPH-6E80`
+	* `1F236 (🈶) SQUARED CJK UNIFIED IDEOGRAPH-6709`
+	* `1F237 (🈷) SQUARED CJK UNIFIED IDEOGRAPH-6708`
+	* `1F238 (🈸) SQUARED CJK UNIFIED IDEOGRAPH-7533`
+	* `1F239 (🈹) SQUARED CJK UNIFIED IDEOGRAPH-5272`
+	* `1F23A (🈺) SQUARED CJK UNIFIED IDEOGRAPH-55B6`
+	* `1F250 (🉐) CIRCLED IDEOGRAPH ADVANTAGE`
+	* `1F251 (🉑) CIRCLED IDEOGRAPH ACCEPT`
 
 ## Backwards Compatibility
 
@@ -170,12 +240,13 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* Unsupported Emoji ZWJ Sequences are visually indistinguishable from their unjoined forms.
 	* Adjacent [Regional Indicators](https://www.unicode.org/reports/tr51/#Flag_Presentation) may combine into a [Flag Sequence](https://www.unicode.org/reports/tr51/#Flags).
 * This ENSIP does not address [confusable](https://www.unicode.org/reports/tr39/) characters.
-	* Single-script confusables:
-		* eg. `a [61]` and `ɑ [251]`
-	* Whole-script confusables:
-		* eg. `ape [61 70 65]` and `аре [430 440 435]`
+	* Single-script confusables: 
+		* `a [61]` and `ɑ [251]`
+	* Whole-script confusables: 
+		* `ape [61 70 65]` and `аре [430 440 435]`
 	* Emoji confusables: 
-		* eg. `🚴🏻 [1F6B4 1F3FB]` and `🚴🏼 [1F6B4 1F3FC]` 
+		* `🚴 [1F6B4]` and `🚴🏻 [1F6B4 1F3FB]`
+		* `🇺🇸 [1F1FA 1F1F8]` and `🇺🇲 [1F1FA 1F1F2]` 
 
 ## Copyright
 
@@ -192,7 +263,7 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 
 ## Appendix: Validation Tests
 
-A list of [validation tests](./tests.json) are provided with the following interpetation:
+A list of [validation tests](https://github.com/adraffy/ens-normalize.js/tree/main/validate/tests.json) are provided with the following interpetation:
 
 * Already Normalized: `{name: "a"}` &rarr; `normalize("a") = "a"`
 * Need Normalization: `{name: "A", norm: "a"}` &rarr; `normalize("A") = "a"`
@@ -202,18 +273,45 @@ A list of [validation tests](./tests.json) are provided with the following inter
 
 ```Javascript
 [
-	// men wrestling
+	// MEN WRESTLING
 	'1F93C 1F3FB 200D 2642 FE0F', // 🤼🏻‍♂
 	'1F93C 1F3FC 200D 2642 FE0F', // 🤼🏼‍♂
 	'1F93C 1F3FD 200D 2642 FE0F', // 🤼🏽‍♂
 	'1F93C 1F3FE 200D 2642 FE0F', // 🤼🏾‍♂
 	'1F93C 1F3FF 200D 2642 FE0F', // 🤼🏿‍♂
-	// women wrestling
+	// WOMEN WRESTLING
 	'1F93C 1F3FB 200D 2640 FE0F', // 🤼🏻‍♀
 	'1F93C 1F3FC 200D 2640 FE0F', // 🤼🏼‍♀
 	'1F93C 1F3FD 200D 2640 FE0F', // 🤼🏽‍♀
 	'1F93C 1F3FE 200D 2640 FE0F', // 🤼🏾‍♀
 	'1F93C 1F3FF 200D 2640 FE0F', // 🤼🏿‍♀
+	// FAMILY  
+	'1F46A 1F3FB', // 👪🏻
+	'1F46A 1F3FC', // 👪🏼
+	'1F46A 1F3FD', // 👪🏽
+	'1F46A 1F3FE', // 👪🏾
+	'1F46A 1F3FF', // 👪🏿
+	// WOMAN WITH BUNNY EARS 
+	'1F46F 1F3FB', // 👯🏻
+	'1F46F 1F3FC', // 👯🏼
+	'1F46F 1F3FD', // 👯🏽
+	'1F46F 1F3FE', // 👯🏾
+	'1F46F 1F3FF', // 👯🏿
+	// WRESTLERS
+	'1F93C 1F3FB', // 🤼🏻
+	'1F93C 1F3FC', // 🤼🏼
+	'1F93C 1F3FD', // 🤼🏽
+	'1F93C 1F3FE', // 🤼🏾
+	'1F93C 1F3FF', // 🤼🏿
+]
+```
+
+## Appendix: Emoji Sequence Blacklist
+
+```Javascript
+[
+	'203C', // (‼️) double exclamation mark
+	'2049', // (⁉️) exclamation question mark
 ]
 ```
 
@@ -222,7 +320,8 @@ A list of [validation tests](./tests.json) are provided with the following inter
 ### Name Beautification
 
 Follow the normalization algorithm, except when an emoji sequence is matched, output the full emoji sequence—don't strip `FE0F`.
-* eg. `normalize("1️⃣") = "1⃣"` &rarr; `beautify("1⃣") = "1️⃣"`
+
+* `normalize("1️⃣") = "1⃣"` &rarr; `beautify("1⃣") = "1️⃣"`
 
 ### Normalized Fragments
 
