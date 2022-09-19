@@ -43,7 +43,7 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 1. For each [label](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#name-syntax) in the output:
 	1. `5F (_) LOW LINE` can only occur at the start of the label.
 	1. The third and fourth characters cannot both be `2D (-) HYPHEN-MINUS` if the label contains only ASCII (`0x00-0x7F`).
-	1. `2019 (’) RIGHT SINGLE QUOTATION MARK` cannot be: the first character, last character, or directly follow another.
+	1. `2019 (’) RIGHT SINGLE QUOTATION MARK` cannot be: the first character, the last character, or directly follow another.
 	1. When the label is converted to NFD (Unicode Normalization Form D), combining marks cannot be: the first character, directly follow an emoji, or directly follow another combining mark.
 1. The output is normalized and ready for [hashing](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#namehash-algorithm).
 
@@ -69,7 +69,7 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 
 ### Derivation of `chars.json`
 
-* [Precomputed data file](https://github.com/adraffy/ens-normalize.js/tree/main/derive/output)
+* [Precomputed data file](https://github.com/adraffy/ens-normalize.js/tree/main/derive/output/chars.json)
 	* `"ignored"` → list of codepoints
 	* `"valid"` → list of codepoints
 	* `"mapped"` → list of codepoint to mapped codepoint(s)
@@ -78,7 +78,7 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
  	* `UseSTD3ASCIIRules = true`
 	* `Transitional_Processing = false`
 	* `CheckBidi = false`
-	* `CheckJoiners = false` (see: [Algorithm](#algorithm), step 3)
+	* `CheckJoiners = false` (see: [Algorithm](#algorithm) § 3.2)
 	* The following deviations are valid:
 		* `DF (ß) LATIN SMALL LETTER SHARP S`
 		* `3C2 (ς) GREEK SMALL LETTER FINAL SIGMA`
@@ -86,10 +86,11 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 * The following are **valid**:
 	* `24 ($) DOLLAR SIGN`
 	* `5F (_) LOW LINE`
-* The following are **disallowed**:
+* The following invisibles are **disallowed**:
 	* `200C (‌) ZERO WIDTH NON-JOINER (ZWNJ)`
 	* `200D (‍) ZERO WIDTH JOINER (ZWJ)`
 	* `2800 (⠀) BRAILLE PATTERN BLANK`
+* The following alternative stops are **disallowed** to simplify unnormalized label detection:
 	* `3002 (。) IDEOGRAPHIC FULL STOP`
 	* `FF0E (．) FULLWIDTH FULL STOP`
 	* `FF61 (｡) HALFWIDTH IDEOGRAPHIC FULL STOP`
@@ -183,12 +184,12 @@ Normalization is the process of canonicalizing a name before for hashing.  It is
 	* `6F7 (۷)` &rarr; `667 (٧) ARABIC-INDIC DIGIT SEVEN`
 	* `6F8 (۸)` &rarr; `668 (٨) ARABIC-INDIC DIGIT EIGHT`
 	* `6F9 (۹)` &rarr; `669 (٩) ARABIC-INDIC DIGIT NINE`
-* `27 (') APOSTROPHE` is **mapped** to `2019 (’) RIGHT SINGLE QUOTATION MARK`
-* All characters (valid or mapped) that decompose (NFD) into adjacent codepoints are **disallowed**.
+* `27 (') APOSTROPHE` is **mapped** to `2019 (’) RIGHT SINGLE QUOTATION MARK` for convenience.
+* All characters (valid or mapped) that decompose (NFD) into adjacent codepoints (see: [Algorithm](#algorithm) § 3.4) are **disallowed**.
 
 ### Derivation of `emoji.json`
 
-* [Precomputed data file](https://github.com/adraffy/ens-normalize.js/tree/main/derive/output)
+* [Precomputed data file](https://github.com/adraffy/ens-normalize.js/tree/main/derive/output/emoji.json)
 	* list of codepoint sequences
 * All emoji are [fully-qualified](https://www.unicode.org/reports/tr51/#def_fully_qualified_emoji) unless specified.
 * [Emoji Sequence Whitelist](#appendix-emoji-sequence-whitelist)
