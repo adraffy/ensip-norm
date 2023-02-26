@@ -133,14 +133,14 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 		* This set can be precomputed from characters that appear in exactly one group and are not **Confused**.
 	* Otherwise:
 		* Append the character to the buffer.
-1. If a **Confused** character was found:
+1. If any **Confused** character was found:
 	* Assert none of the remaining groups contain any buffered characters.
 1. The label is not confusable.
 
 ## Description of `spec.json`
 
 * <a name="group">**Groups**</a> (`"groups"`) — groups of characters that can constitute a label
-	* `"name"` — ASCII name of the group (or abbreviation if `"restricted"`).
+	* `"name"` — ASCII name of the group (or abbreviation if **Restricted**).
 		* Example: *Latin*, *Japanese*, *Egyp*
 	* **Restricted** (`"restricted"`) — **`true`** if [Excluded](https://www.unicode.org/reports/tr31#Table_Candidate_Characters_for_Exclusion_from_Identifiers) or [Limited-Use](https://www.unicode.org/reports/tr31/#Table_Limited_Use_Scripts) script
 		* Example: *Latin* → **`false`**, *Egyp* → **`true`** 
@@ -214,7 +214,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* Nearly all vocalization annotations are **disallowed**.
 	* All parentheses and brackets are **disallowed**.
 	* Obsolete, deprecated, and archaic characters are **disallowed**.
-	* Combining, modifing, reversed, flipped, turned, and partial variations are **disallowed**. 
+	* Combining, modifying, reversed, flipped, turned, and partial variations are **disallowed**. 
 	* When multiple weights of the same character exist, the variant closest to **heavy** is selected and the rest **disallowed**.
 		* This occasionally selects single-character emoji.
 	* Many visually confusable characters are **disallowed**.
@@ -233,12 +233,12 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* `FE58 (﹘) SMALL EM DASH`
 	* `2E3A (⸺) TWO-EM DASH` → `"--"`
 	* `2E3B (⸻) THREE-EM DASH` → `"---"`
-* Characters are assigned to **Groups** according to their [Unicode script extensions](https://www.unicode.org/reports/tr24/#Script_Extensions_Def).
+* Characters are assigned to **Groups** according to [Unicode Script_Extensions](https://www.unicode.org/reports/tr24/#Script_Extensions_Def).
 * **Groups** may contain [multiple scripts](https://github.com/adraffy/ens-normalize.js/blob/20230221-stable/derive/rules/scripts.js):
 	* Only *Latin*, *Greek*, *Cyrillic*, *Han*, *Japanese*, and *Korean* have access to *Common* characters.
 	* *Latin*, *Greek*, *Cyrillic*, *Han*, *Japanese*, *Korean*, and *Bopomofo* only permit specific **Combining Mark** sequences.
 	* *Han*, *Japanese*, and *Korean*  have access to `a-z`.
-	* **Restricted** groups are single-script.
+	* **Restricted** groups are always single-script.
 * **Groups** with multiple scripts are inspired from [Unicode augmented script sets](https://www.unicode.org/reports/tr39/#Mixed_Script_Detection).
 * *Braille*, *Linear A*, *Linear B*, and *Signwriting* scripts are **disallowed**.
 * `27 (') APOSTROPHE` is **mapped** to `2019 (’) RIGHT SINGLE QUOTATION MARK` for convenience.
@@ -272,12 +272,13 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 
 ## Security Considerations
 
-* Unicode presentation can vary between platforms.
+* Unicode presentation may vary between applications and devices.
+	* Unicode is text and ultimately subject to font-styling.
 	* Unsupported characters (`�`) may appear unremarkable.
 	* Unsupported emoji sequences with ZWJ may present indistinguishable from those without ZWJ.
 * Names composed of labels of different bidi properties may appear differently depending on context.
-	* Normalization does not enforce IDNA bidirectional rules.  
-	* Names may be composed of labels of mixed directions however valid labels are never mixed.
+	* Normalization does not enforce single-directional names.
+	* Names may be composed of labels of different bidi however valid labels are never bidi.
 * Not all normalized names are visually unambiguous.
 * This ENSIP only addresses **single-character** [confusables](https://www.unicode.org/reports/tr39/):
 	* There exist confusable **multi-character** sequences:
