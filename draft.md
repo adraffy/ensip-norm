@@ -12,7 +12,7 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 
 ## Motivation
 
-* Since ENSIP-1 was finalized in 2016, Unicode has [evolved](https://unicode.org/history/publicationdates.html) from version 8.0.0 to 15.0.0 and incorporated many new characters, including complex emoji sequences. 
+* Since [EIP-137](https://eips.ethereum.org/EIPS/eip-137)/[ENSIP-1](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens) was finalized in 2016, Unicode has [evolved](https://unicode.org/history/publicationdates.html) from version 8.0.0 to 15.0.0 and incorporated many new characters, including complex emoji sequences. 
 * ENSIP-1 does not state the version of Unicode.
 * ENSIP-1 implies but does not state an explicit flavor of IDNA processing. 
 * [UTS-46](https://unicode.org/reports/tr46/) is insufficient to normalize emoji sequences. Correct emoji processing is only possible with [UTS-51](https://www.unicode.org/reports/tr51/).
@@ -20,7 +20,7 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 * The success of ENS has encouraged spoofing via the following techniques:
 	1. Insertion of zero-width characters.
 	1. Using names which normalize differently between algorithms. 
-	1. Using names which render differently between platforms.
+	1. Using names which render differently between applications and devices.
 	1. Substitution of confusable (look-alike) characters.
 	1. Mixing incompatible scripts.
 
@@ -185,7 +185,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* ContextJ: `CheckJoiners` is **`false`**
 	* ContextO: 
 		* `ZWNJ` is disallowed **everywhere**.
-		* `ZWJ` can **only** appear in emoji sequences.
+		* `ZWJ` **only** appears in emoji sequences.
 		* `B7 (·) MIDDLE DOT` is **disallowed**.
 		* `375 (͵) GREEK LOWER NUMERAL SIGN` is **disallowed**.
 		* `0x5F3 (׳) HEBREW PUNCTUATION GERESH` and `5F4 (״) HEBREW PUNCTUATION GERSHAYIM` are *Greek*.
@@ -203,7 +203,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* `24 ($) DOLLAR SIGN`
 	* `5F (_) LOW LINE`
 * Only label separator is `2E (.) FULL STOP`
-	* No character maps to a sequence with this character.
+	* No character maps to this character.
 	* This simplifies unnormalized name detection in unstructured text.
 	* The following alternatives are **disallowed**:
 		* `3002 (。) IDEOGRAPHIC FULL STOP`
@@ -213,12 +213,19 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* Nearly all punctuation are **disallowed**.
 	* Nearly all vocalization annotations are **disallowed**.
 	* All parentheses and brackets are **disallowed**.
-	* Obsolete, deprecated, and archaic characters are **disallowed**.
-	* Combining, modifying, reversed, flipped, turned, and partial variations are **disallowed**. 
+	* Obsolete, deprecated, and ancient characters are **disallowed**.
+		* Example: `463 (ѣ) CYRILLIC SMALL LETTER YAT`
+	* Combining, modifying, reversed, flipped, turned, and partial variations are **disallowed**.
+		* Example: `218A (↊) TURNED DIGIT TWO`
 	* When multiple weights of the same character exist, the variant closest to **heavy** is selected and the rest **disallowed**.
+		* Example: `🞡🞢🞣🞤✚🞥🞦🞧` → `271A (✚) HEAVY GREEK CROSS`
 		* This occasionally selects single-character emoji.
 	* Many visually confusable characters are **disallowed**.
-	* Many estoteric characters are **disallowed**.
+		* Example: `131 (ı) LATIN SMALL LETTER DOTLESS I`
+	* Many ligatures, *n*-graphs, and *n*-grams are **disallowed.**
+		* Example: `A74F (ꝏ) LATIN SMALL LETTER OO`
+	* Many esoteric characters are **disallowed**.
+		* Example: `2376 (⍶) APL FUNCTIONAL SYMBOL ALPHA UNDERBAR`
 * Many hyphen-like characters are **mapped** to `2D (-) HYPHEN-MINUS`:
 	* `2010 (‐) HYPHEN`
 	* `2011 (‑) NON-BREAKING HYPHEN`
