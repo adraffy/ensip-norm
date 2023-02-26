@@ -36,7 +36,7 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 * Normalization is the process of canonicalizing a name before for hashing.
 * It is idempotent: applying normalization multiple times produces the same result.
 * For user convenience, leading and trailing whitespace should be trimmed before normalization, as all whitespace codepoints are disallowed.  However, internal characters should remain unmodified.
-* No string transformations (like casefolding) should be applied.
+* No string transformations (like case-folding) should be applied.
 
 1. Split the name into [labels](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#name-syntax).
 1. [Normalize](#normalize) each label.
@@ -50,7 +50,7 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 1. Apply NFC to each **Text** token.
 1. Strip `FE0F` from each **Emoji** token.
 1. [Validate](#validate) — check if the tokens are valid and obtain the **label type**.
-	* The **label type** and **Restricted** state may be presented to user for additonal security.
+	* The **label type** and **Restricted** state may be presented to user for additional security.
 1. Concatenate the tokens together.
 	* Return the normalized label.
 
@@ -140,7 +140,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 ## Description of `spec.json`
 
 * <a name="group">**Groups**</a> (`"groups"`) — groups of characters that can constitute a label
-	* `"name"` — ASCII name of the group (or abbreviation if **Restricted**).
+	* `"name"` — ASCII name of the group (or abbreviation if **Restricted**)
 		* Example: *Latin*, *Japanese*, *Egyp*
 	* **Restricted** (`"restricted"`) — **`true`** if [Excluded](https://www.unicode.org/reports/tr31#Table_Candidate_Characters_for_Exclusion_from_Identifiers) or [Limited-Use](https://www.unicode.org/reports/tr31/#Table_Limited_Use_Scripts) script
 		* Example: *Latin* → **`false`**, *Egyp* → **`true`** 
@@ -182,10 +182,10 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 		* `3C2 (ς) GREEK SMALL LETTER FINAL SIGMA`
 	* `CheckHyphens` is **`false`** ([WhatWG URL Spec § 3.3](https://url.spec.whatwg.org/#idna))
 	* `CheckBidi` is **`false`**
-	* ContextJ: `CheckJoiners` is **`false`**
-	* ContextO: 
+	* [ContextJ](https://datatracker.ietf.org/doc/html/rfc5892#appendix-A.1):
 		* `ZWNJ` is disallowed **everywhere**.
-		* `ZWJ` **only** appears in emoji sequences.
+		* `ZWJ` **only** appears in emoji sequences.	
+	* [ContextO](https://datatracker.ietf.org/doc/html/rfc5892#appendix-A.3): 
 		* `B7 (·) MIDDLE DOT` is **disallowed**.
 		* `375 (͵) GREEK LOWER NUMERAL SIGN` is **disallowed**.
 		* `0x5F3 (׳) HEBREW PUNCTUATION GERESH` and `5F4 (״) HEBREW PUNCTUATION GERSHAYIM` are *Greek*.
@@ -211,13 +211,13 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 		* `FF61 (｡) HALFWIDTH IDEOGRAPHIC FULL STOP`
 * Many characters are **disallowed** for [various reasons](https://github.com/adraffy/ens-normalize.js/blob/20230221-stable/derive/rules/chars-disallow.js):
 	* Nearly all punctuation are **disallowed**.
-	* Nearly all vocalization annotations are **disallowed**.
 	* All parentheses and brackets are **disallowed**.
+	* Nearly all vocalization annotations are **disallowed**.
 	* Obsolete, deprecated, and ancient characters are **disallowed**.
 		* Example: `463 (ѣ) CYRILLIC SMALL LETTER YAT`
 	* Combining, modifying, reversed, flipped, turned, and partial variations are **disallowed**.
 		* Example: `218A (↊) TURNED DIGIT TWO`
-	* When multiple weights of the same character exist, the variant closest to **heavy** is selected and the rest **disallowed**.
+	* When multiple weights of the same character exist, the variant closest to "heavy" is selected and the rest **disallowed**.
 		* Example: `🞡🞢🞣🞤✚🞥🞦🞧` → `271A (✚) HEAVY GREEK CROSS`
 		* This occasionally selects single-character emoji.
 	* Many visually confusable characters are **disallowed**.
@@ -249,7 +249,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 * **Groups** with multiple scripts are inspired from [Unicode augmented script sets](https://www.unicode.org/reports/tr39/#Mixed_Script_Detection).
 * *Braille*, *Linear A*, *Linear B*, and *Signwriting* scripts are **disallowed**.
 * `27 (') APOSTROPHE` is **mapped** to `2019 (’) RIGHT SINGLE QUOTATION MARK` for convenience.
-* Ethereum symbol (`39E (Ξ) GREEK CAPITAL LETTER XI`) is casefolded and usable by all groups with access to *Common*.
+* Ethereum symbol (`39E (Ξ) GREEK CAPITAL LETTER XI`) is case-folded and usable by all groups with access to *Common*.
 * Emoji sequences:
 	* All sequences are [fully-qualified](https://www.unicode.org/reports/tr51/#def_fully_qualified_emoji).
 	* Digits (`0-9`) are [not emoji](https://github.com/adraffy/ens-normalize.js/blob/20230221-stable/derive/rules/emoji.js#L28).
@@ -287,7 +287,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* Normalization does not enforce single-directional names.
 	* Names may be composed of labels of different bidi however valid labels are never bidi.
 * Not all normalized names are visually unambiguous.
-* This ENSIP only addresses **single-character** [confusables](https://www.unicode.org/reports/tr39/):
+* This ENSIP only addresses **single-character** [confusables](https://www.unicode.org/reports/tr39/).
 	* There exist confusable **multi-character** sequences:
 		* `"ஶ்ரீ" [BB6 BCD BB0 BC0]`
 		* `"ஸ்ரீ" [BB8 BCD BB0 BC0]`
@@ -317,15 +317,15 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 
 ## Appendix: Validation Tests
 
-A list of [validation tests](https://github.com/adraffy/ens-normalize.js/tree/20230221-stable/validate/tests.json) are provided with the following interpetation:
+A list of [validation tests](https://github.com/adraffy/ens-normalize.js/tree/20230221-stable/validate/tests.json) are provided with the following interpretation:
 
-* Already Normalized: `{name: "a"}` → `normalize("a") = "a"`
-* Need Normalization: `{name: "A", norm: "a"}` → `normalize("A") = "a"`
-* Expect Error: `{name: "@", error: true}` → `normalize("@") throws`
+* Already Normalized: `{name: "a"}` → `normalize("a")` is `"a"`
+* Need Normalization: `{name: "A", norm: "a"}` → `normalize("A")` is `"a"`
+* Expect Error: `{name: "@", error: true}` → `normalize("@")` throws
 
 ## Annex: Beautification
 
-Follow the [algorithm](#algorithm), except:
+Follow [algorithm](#algorithm), except:
 
 * Do not strip `FE0F` from **Emoji** tokens.
 * Replace `3BE (ξ) GREEK SMALL LETTER XI` with `39E (Ξ) GREEK CAPITAL LETTER XI` if the label isn't *Greek*.
