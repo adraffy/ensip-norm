@@ -56,12 +56,12 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 
 ### Tokenize
 
-Given a string, convert to codepoints, and produce a list of **Text** and **Emoji** tokens, each with payload of codepoints.
+Given a string, convert to codepoints, and produce a list of **Text** and **Emoji** tokens, each with a payload of codepoints.
 
 1. Allocate an empty codepoint buffer.
 1. Find the longest emoji sequence that matches the remaining input.
 	* `FE0F` is optional from the input during matching.
-	* Example: `Emoji[A FE0F B]` matches `[A B]` and `[A FE0F B]` but not `[A FE0F FE0F B]`
+	* Example: `Emoji[A FE0F B]` matches `[A FE0F B]` and `[A B]` but not `[A FE0F FE0F B]`
 1. If an emoji sequence is found:
 	* If the buffer is nonempty, emit a **Text** token, and clear the buffer.
 	* Emit an **Emoji** token with the fully-qualified matching sequence.
@@ -103,7 +103,7 @@ Given a list of **Emoji** and **Text** tokens, determine if the composition is v
 	* Apply NFD to the concatenated text characters.
 	* For every contiguous sequence of **NSM** characters:
 		* Each character must be unique.
-		* Number of characters cannot exceed **Maximum NSM** (`4`).
+		* Number of characters cannot exceed **Maximum NSM** (4).
 1. [Wholes](#wholes) — check if text characters form a confusable.
 1. The label is valid.
 	* Return the name of the group.
@@ -188,7 +188,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* [ContextO](https://datatracker.ietf.org/doc/html/rfc5892#appendix-A.3): 
 		* `B7 (·) MIDDLE DOT` is **disallowed**.
 		* `375 (͵) GREEK LOWER NUMERAL SIGN` is **disallowed**.
-		* `0x5F3 (׳) HEBREW PUNCTUATION GERESH` and `5F4 (״) HEBREW PUNCTUATION GERSHAYIM` are *Greek*.
+		* `5F3 (׳) HEBREW PUNCTUATION GERESH` and `5F4 (״) HEBREW PUNCTUATION GERSHAYIM` are *Greek*.
 		* `30FB (・) KATAKANA MIDDLE DOT` is **Fenced** and *Han*, *Japanese*, *Korean*, and *Bopomofo*. 
 		* Some [Extended Arabic Numerals](https://en.wikipedia.org/wiki/Arabic_numerals) are **mapped**:
 			* `6F0 (۰)` → `660 (٠) ARABIC-INDIC DIGIT ZERO`
@@ -287,9 +287,9 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* Unicode text is ultimately subject to font-styling and display context.
 	* Unsupported characters (`�`) may appear unremarkable.
 	* Unsupported emoji sequences with ZWJ may appear indistinguishable from those without ZWJ.
-* Names composed of labels of different bidi properties may appear differently depending on context.
+* Names composed of labels with varying bidi properties may appear differently depending on context.
 	* Normalization does not enforce single-directional names.
-	* Names may be composed of labels of different directions however normalized labels are never bidirectional.
+	* Names may be composed of labels of different directions but normalized labels are never bidirectional.
 * Not all normalized names are visually unambiguous.
 * This ENSIP only addresses **single-character** [confusables](https://www.unicode.org/reports/tr39/).
 	* There exist confusable-yet-distinct **single-character** confusables:
