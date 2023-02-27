@@ -139,7 +139,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 
 ## Description of `spec.json`
 
-* <a name="group">**Groups**</a> (`"groups"`) — groups of characters that can constitute a label
+* **Groups** (`"groups"`) — groups of characters that can constitute a label
 	* `"name"` — ASCII name of the group (or abbreviation if **Restricted**)
 		* Example: *Latin*, *Japanese*, *Egyp*
 	* **Restricted** (`"restricted"`) — **`true`** if [Excluded](https://www.unicode.org/reports/tr31#Table_Candidate_Characters_for_Exclusion_from_Identifiers) or [Limited-Use](https://www.unicode.org/reports/tr31/#Table_Limited_Use_Scripts) script
@@ -151,25 +151,25 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* **CM Whitelisted** (`"cm"`) — (optional) set of allowed compound sequences in NFC
 		* Example: `[[BaseCP, CM, ...], ...]`
 		* There are currently no compound sequences: **`true`** if `[]` otherwise **`false`**.
-* <a name="ignored">**Ignored**</a> (`"ignored"`) — characters that are ignored during normalization
+* **Ignored** (`"ignored"`) — characters that are ignored during normalization
 	* Example: `34F (�) COMBINING GRAPHEME JOINER`
-* <a name="mapped">**Mapped**</a> (`"mapped"`) — characters that are mapped to a sequence of **valid** characters
+* **Mapped** (`"mapped"`) — characters that are mapped to a sequence of **valid** characters
 	* Example: `41 (A) LATIN CAPITAL LETTER A` → `[61 (a) LATIN SMALL LETTER A]`
 	* Example: `2165 (Ⅵ) ROMAN NUMERAL SIX` → `[76 (v) LATIN SMALL LETTER V, 69 (i) LATIN SMALL LETTER I]`
-* <a name="wholes">**Whole Confusable**</a> (`"wholes"`) — groups of characters that look similar
+* **Whole Confusable** (`"wholes"`) — groups of characters that look similar
 	* `"valid"` — subset of confusable characters that are allowed
 		* Example: `34 (4) DIGIT FOUR`
 	* **Confused** (`"confused"`) — subset of confusable characters that confuse
 		* Example: `13CE (Ꮞ) CHEROKEE LETTER SE`
-* <a name="fenced">**Fenced**</a> (`"fenced"`) — set of characters that cannot be first, last, or contiguous
+* **Fenced** (`"fenced"`) — set of characters that cannot be first, last, or contiguous
 	* Example: `2044 (⁄) FRACTION SLASH`
-* <a name="emoji">**Emoji**</a> (`"emoji"`) — allowed emoji sequences
+* **Emoji** (`"emoji"`) — allowed emoji sequences
 	* Example: `[1F468 200D 1F4BB] (👨‍💻) man technologist`
-* <a name="cm">**Combining Marks / CM**</a> (`"cm"`) — characters that are [Combining Marks](https://www.unicode.org/Public/15.0.0/ucd/extracted/DerivedGeneralCategory)
-* <a name="nsm">**Non-spacing Marks / NSM**</a> (`"nsm"`) — valid subset of **Combining Marks** with general category (`"Mn"` or `"Me"`)
-* <a name="nsm_max">**Maximum NSM**</a> (`"nsm_max"`) — maximum sequence length of unique **NSM**
-* <a name="escape">**Should Escape**</a> (`"escape"`) — characters that [shouldn't be printed](https://github.com/adraffy/ens-normalize.js/blob/20230221-stable/derive/rules/chars-escape.js)
-* <a name="">**NFC Check**</a> (`"nfc_check"`) — valid characters that [may require NFC](https://unicode.org/reports/tr15/#NFC_QC_Optimization)
+* **Combining Marks / CM** (`"cm"`) — characters that are [Combining Marks](https://www.unicode.org/Public/15.0.0/ucd/extracted/DerivedGeneralCategory)
+* **Non-spacing Marks / NSM** (`"nsm"`) — valid subset of **CM** with general category (`"Mn"` or `"Me"`)
+* **Maximum NSM** (`"nsm_max"`) — maximum sequence length of unique **NSM**
+* **Should Escape** (`"escape"`) — characters that [shouldn't be printed](https://github.com/adraffy/ens-normalize.js/blob/20230221-stable/derive/rules/chars-escape.js)
+* **NFC Check** (`"nfc_check"`) — valid characters that [may require NFC](https://unicode.org/reports/tr15/#NFC_QC_Optimization)
 
 ## Derivation
 
@@ -285,7 +285,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 
 * Unicode presentation may vary between applications and devices.
 	* Unicode text is ultimately subject to font-styling and display context.
-	* Unsupported characters (`�` or `￿`) may appear unremarkable.
+	* Unsupported characters (`�`) may appear unremarkable.
 	* Unsupported emoji sequences with ZWJ may appear indistinguishable from those without ZWJ.
 * Names composed of labels of different bidi properties may appear differently depending on context.
 	* Normalization does not enforce single-directional names.
