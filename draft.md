@@ -12,7 +12,7 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 
 ## Motivation
 
-* Since [ENSIP-1](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens) (was [EIP-137](https://eips.ethereum.org/EIPS/eip-137)) was finalized in 2016, Unicode has [evolved](https://unicode.org/history/publicationdates.html) from version 8.0.0 to 15.0.0 and incorporated many new characters, including complex emoji sequences. 
+* Since [ENSIP-1](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens) (originally [EIP-137](https://eips.ethereum.org/EIPS/eip-137)) was finalized in 2016, Unicode has [evolved](https://unicode.org/history/publicationdates.html) from version 8.0.0 to 15.0.0 and incorporated many new characters, including complex emoji sequences. 
 * ENSIP-1 does not state the version of Unicode.
 * ENSIP-1 implies but does not state an explicit flavor of IDNA processing. 
 * [UTS-46](https://unicode.org/reports/tr46/) is insufficient to normalize emoji sequences. Correct emoji processing is only possible with [UTS-51](https://www.unicode.org/reports/tr51/).
@@ -35,7 +35,7 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 
 * Normalization is the process of canonicalizing a name before for hashing.
 * It is idempotent: applying normalization multiple times produces the same result.
-* For user convenience, leading and trailing whitespace should be trimmed before normalization, as all whitespace codepoints are disallowed.  However, internal characters should remain unmodified.
+* For user convenience, leading and trailing whitespace should be trimmed before normalization, as all whitespace codepoints are disallowed.  Inner characters should remain unmodified.
 * No string transformations (like case-folding) should be applied.
 
 1. Split the name into [labels](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens#name-syntax).
@@ -116,8 +116,8 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 1. Start with the set of all groups.
 1. For each unique character:
 	* If the character is **Confused** (a member of a **Whole Confusable**):
-		* Retain groups with **Whole Confusable** characters excluding the **Confusable Extent** of the matching **Confused**.
-			* The **Confusable Extent** is the fully-connected graph formed from groups of the same confusable and different confusables of the same group.
+		* Retain groups with **Whole Confusable** characters excluding the **Confusable Extent** of the matching **Confused** character.
+			* The **Confusable Extent** is the fully-connected graph formed from different groups with the same confusable and different confusables of the same group.
 			* This mapping from **Confused** to **Confusable Extent** can be precomputed.
 			* Example: `"o"` **Whole Confusable** 
 				1. `6F (o) LATIN SMALL LETTER O` → *Latin*, *Han*, *Japanese*, and *Korean*
@@ -133,7 +133,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 		* This set can be precomputed from characters that appear in exactly one group and are not **Confused**.
 	* Otherwise:
 		* Append the character to the buffer.
-1. If any **Confused** character was found:
+1. If any **Confused** characters were found:
 	* Assert none of the remaining groups contain any buffered characters.
 1. The label is not confusable.
 
@@ -157,17 +157,17 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* Example: `41 (A) LATIN CAPITAL LETTER A` → `[61 (a) LATIN SMALL LETTER A]`
 	* Example: `2165 (Ⅵ) ROMAN NUMERAL SIX` → `[76 (v) LATIN SMALL LETTER V, 69 (i) LATIN SMALL LETTER I]`
 * <a name="wholes">**Whole Confusable**</a> (`"wholes"`) — groups of characters that look similar
-	* `"valid"` — set of confusable characters that are allowed
+	* `"valid"` — subset of confusable characters that are allowed
 		* Example: `34 (4) DIGIT FOUR`
-	* **Confused** (`"confused"`) — set of confusable characters that are not allowed
+	* **Confused** (`"confused"`) — subset of confusable characters that confuse
 		* Example: `13CE (Ꮞ) CHEROKEE LETTER SE`
 * <a name="fenced">**Fenced**</a> (`"fenced"`) — set of characters that cannot be first, last, or contiguous
 	* Example: `2044 (⁄) FRACTION SLASH`
 * <a name="emoji">**Emoji**</a> (`"emoji"`) — allowed emoji sequences
 	* Example: `[1F468 200D 1F4BB] (👨‍💻) man technologist`
+* <a name="cm">**Combining Marks / CM**</a> (`"cm"`) — characters that are [Combining Marks](https://www.unicode.org/Public/15.0.0/ucd/extracted/DerivedGeneralCategory)
 * <a name="nsm">**Non-spacing Marks / NSM**</a> (`"nsm"`) — valid subset of **Combining Marks** with general category (`"Mn"` or `"Me"`)
 * <a name="nsm_max">**Maximum NSM**</a> (`"nsm_max"`) — maximum sequence length of unique **NSM**
-* <a name="cm">**Combining Marks / CM**</a> (`"cm"`) — characters that are [Combining Marks](https://www.unicode.org/Public/15.0.0/ucd/extracted/DerivedGeneralCategory)
 * <a name="escape">**Should Escape**</a> (`"escape"`) — characters that [shouldn't be printed](https://github.com/adraffy/ens-normalize.js/blob/20230221-stable/derive/rules/chars-escape.js)
 * <a name="">**NFC Check**</a> (`"nfc_check"`) — valid characters that [may require NFC](https://unicode.org/reports/tr15/#NFC_QC_Optimization)
 
@@ -219,7 +219,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 		* Example: `218A (↊) TURNED DIGIT TWO`
 	* When multiple weights of the same character exist, the variant closest to "heavy" is selected and the rest **disallowed**.
 		* Example: `🞡🞢🞣🞤✚🞥🞦🞧` → `271A (✚) HEAVY GREEK CROSS`
-		* This occasionally selects single-character emoji.
+		* This occasionally selects emoji.
 	* Many visually confusable characters are **disallowed**.
 		* Example: `131 (ı) LATIN SMALL LETTER DOTLESS I`
 	* Many ligatures, *n*-graphs, and *n*-grams are **disallowed.**
@@ -289,12 +289,12 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* Unsupported emoji sequences with ZWJ may appear indistinguishable from those without ZWJ.
 * Names composed of labels of different bidi properties may appear differently depending on context.
 	* Normalization does not enforce single-directional names.
-	* Names may be composed of labels of different bidi however valid labels are never bidi.
+	* Names may be composed of labels of different directions however normalized labels are never bidirectional.
 * Not all normalized names are visually unambiguous.
 * This ENSIP only addresses **single-character** [confusables](https://www.unicode.org/reports/tr39/).
-	* There exist "subjectively confusable" yet distinct **single-character** confusables:
-		* `"B"` — `62 (b) LATIN SMALL LETTER B` and `13F4 (Ᏼ) CHEROKEE LETTER YV`
-		* Curly `"B"` — `DF (ß) LATIN SMALL LETTER SHARP S` and `3B2 (β) GREEK SMALL LETTER BETA`
+	* There exist confusable-yet-distinct **single-character** confusables:
+		* `62 (b) LATIN SMALL LETTER B` and `13F4 (Ᏼ) CHEROKEE LETTER YV`
+		* `DF (ß) LATIN SMALL LETTER SHARP S` and `3B2 (β) GREEK SMALL LETTER BETA`
 	* There exist confusable **multi-character** sequences:
 		* `"ஶ்ரீ" [BB6 BCD BB0 BC0]`
 		* `"ஸ்ரீ" [BB8 BCD BB0 BC0]`
