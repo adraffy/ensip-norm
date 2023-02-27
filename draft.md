@@ -159,7 +159,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 * <a name="wholes">**Whole Confusable**</a> (`"wholes"`) — groups of characters that look similar
 	* `"valid"` — set of confusable characters that are allowed
 		* Example: `34 (4) DIGIT FOUR`
-	* **Confused** (`"confused"`) — set of confusable characters that not allowed
+	* **Confused** (`"confused"`) — set of confusable characters that are not allowed
 		* Example: `13CE (Ꮞ) CHEROKEE LETTER SE`
 * <a name="fenced">**Fenced**</a> (`"fenced"`) — set of characters that cannot be first, last, or contiguous
 	* Example: `2044 (⁄) FRACTION SLASH`
@@ -249,7 +249,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 * **Groups** with multiple scripts are inspired from [Unicode augmented script sets](https://www.unicode.org/reports/tr39/#Mixed_Script_Detection).
 * *Braille*, *Linear A*, *Linear B*, and *Signwriting* scripts are **disallowed**.
 * `27 (') APOSTROPHE` is **mapped** to `2019 (’) RIGHT SINGLE QUOTATION MARK` for convenience.
-* Ethereum symbol (`39E (Ξ) GREEK CAPITAL LETTER XI`) is case-folded and usable by all groups with access to *Common*.
+* Ethereum symbol (`39E (Ξ) GREEK CAPITAL LETTER XI`) is case-folded and *Common*.
 * Emoji sequences:
 	* All sequences are [fully-qualified](https://www.unicode.org/reports/tr51/#def_fully_qualified_emoji).
 	* Digits (`0-9`) are [not emoji](https://github.com/adraffy/ens-normalize.js/blob/20230221-stable/derive/rules/emoji.js#L28).
@@ -270,6 +270,10 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* All singular [Regional Indicators](https://github.com/adraffy/ens-normalize.js/blob/20230221-stable/derive/rules/emoji.js#L74) are **disabled**.
 	* [Blacklisted emoji](https://github.com/adraffy/ens-normalize.js/blob/20230221-stable/derive/rules/emoji.js#L110) are **disabled**.
 	* [Whitelisted emoji](https://github.com/adraffy/ens-normalize.js/blob/20230221-stable/derive/rules/emoji.js#L116) are **enabled**.
+* Confusables:
+	* Emoji are not confusable.
+	* ASCII confusables are case-folded.
+		* Example: `61 (a) LATIN SMALL LETTER A` confuses with `13AA (Ꭺ) CHEROKEE LETTER GO`
 
 ## Backwards Compatibility
 
@@ -280,14 +284,17 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 ## Security Considerations
 
 * Unicode presentation may vary between applications and devices.
-	* Unicode is text and ultimately subject to font-styling.
-	* Unsupported characters (`�`) may appear unremarkable.
+	* Unicode text is ultimately subject to font-styling and display context.
+	* Unsupported characters (`�` or `￿`) may appear unremarkable.
 	* Unsupported emoji sequences with ZWJ may appear indistinguishable from those without ZWJ.
 * Names composed of labels of different bidi properties may appear differently depending on context.
 	* Normalization does not enforce single-directional names.
 	* Names may be composed of labels of different bidi however valid labels are never bidi.
 * Not all normalized names are visually unambiguous.
 * This ENSIP only addresses **single-character** [confusables](https://www.unicode.org/reports/tr39/).
+	* There exist "subjectively confusable" yet distinct **single-character** confusables:
+		* `"B"` — `62 (b) LATIN SMALL LETTER B` and `13F4 (Ᏼ) CHEROKEE LETTER YV`
+		* Curly `"B"` — `DF (ß) LATIN SMALL LETTER SHARP S` and `3B2 (β) GREEK SMALL LETTER BETA`
 	* There exist confusable **multi-character** sequences:
 		* `"ஶ்ரீ" [BB6 BCD BB0 BC0]`
 		* `"ஸ்ரீ" [BB8 BCD BB0 BC0]`
