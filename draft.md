@@ -12,7 +12,7 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 
 ## Motivation
 
-* Since [EIP-137](https://eips.ethereum.org/EIPS/eip-137)/[ENSIP-1](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens) was finalized in 2016, Unicode has [evolved](https://unicode.org/history/publicationdates.html) from version 8.0.0 to 15.0.0 and incorporated many new characters, including complex emoji sequences. 
+* Since [ENSIP-1](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens) (was [EIP-137](https://eips.ethereum.org/EIPS/eip-137)) was finalized in 2016, Unicode has [evolved](https://unicode.org/history/publicationdates.html) from version 8.0.0 to 15.0.0 and incorporated many new characters, including complex emoji sequences. 
 * ENSIP-1 does not state the version of Unicode.
 * ENSIP-1 implies but does not state an explicit flavor of IDNA processing. 
 * [UTS-46](https://unicode.org/reports/tr46/) is insufficient to normalize emoji sequences. Correct emoji processing is only possible with [UTS-51](https://www.unicode.org/reports/tr51/).
@@ -20,7 +20,7 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 * The success of ENS has encouraged spoofing via the following techniques:
 	1. Insertion of zero-width characters.
 	1. Using names which normalize differently between algorithms. 
-	1. Using names which render differently between applications and devices.
+	1. Using names which appear differently between applications and devices.
 	1. Substitution of confusable (look-alike) characters.
 	1. Mixing incompatible scripts.
 
@@ -49,8 +49,8 @@ This ENSIP standardizes Ethereum Name Service (ENS) name normalization process o
 	* If there are no tokens, the label cannot be normalized.
 1. Apply NFC to each **Text** token.
 1. Strip `FE0F` from each **Emoji** token.
-1. [Validate](#validate) — check if the tokens are valid and obtain the **label type**.
-	* The **label type** and **Restricted** state may be presented to user for additional security.
+1. [Validate](#validate) — check if the tokens are valid and obtain the **Label Type**.
+	* The **Label Type** and **Restricted** state may be presented to user for additional security.
 1. Concatenate the tokens together.
 	* Return the normalized label.
 
@@ -79,7 +79,7 @@ Given a string, convert to codepoints, and produce a list of **Text** and **Emoj
 
 ### Validate
 
-Given a list of **Emoji** and **Text** tokens, determine if the composition is valid and return the label type.
+Given a list of **Emoji** and **Text** tokens, determine if the composition is valid and return the **Label Type**.
 
 1. If only **Emoji** tokens:
 	* Return `"Emoji"`
@@ -126,9 +126,9 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 		* If no groups remain, the label is not confusable.
 		* Example: `"тӕ" [442 4D5]`
 			1. `"т"` → `442 (т) CYRILLIC SMALL LETTER TE` and `3C4 (τ) GREEK SMALL LETTER TAU`
-				* **ALL** ∩ [*Latin*, *Greek*] → [*Latin*, *Greek*]
+				* **ALL** ∩ [*Cyrillic*, *Greek*] → [*Cyrillic*, *Greek*]
 			1. `"ӕ"` → `E6 (æ) LATIN SMALL LETTER AE` and `4D5 (ӕ) CYRILLIC SMALL LIGATURE A IE`
-				* [*Latin*, *Greek*] ∩ [*Latin*, *Cyrillic*] → [*Latin*]
+				* [*Cyrillic*, *Greek*] ∩ [*Latin*, *Cyrillic*] → [*Cyrillic*]
 	* If the character is **Unique**, the label is not confusable.
 		* This set can be precomputed from characters that appear in exactly one group and are not **Confused**.
 	* Otherwise:
