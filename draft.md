@@ -152,7 +152,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 		* Example: `[[BaseCP, CM, ...], ...]`
 		* There are currently no compound sequences: **`true`** if `[]` otherwise **`false`**.
 * <a name="ignored">**Ignored**</a> (`"ignored"`) — characters that are ignored during normalization
-	* Example: `34F () COMBINING GRAPHEME JOINER`
+	* Example: `34F (�) COMBINING GRAPHEME JOINER`
 * <a name="mapped">**Mapped**</a> (`"mapped"`) — characters that are mapped to a sequence of **valid** characters
 	* Example: `41 (A) LATIN CAPITAL LETTER A` → `[61 (a) LATIN SMALL LETTER A]`
 	* Example: `2165 (Ⅵ) ROMAN NUMERAL SIX` → `[76 (v) LATIN SMALL LETTER V, 69 (i) LATIN SMALL LETTER I]`
@@ -183,8 +183,8 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 	* `CheckHyphens` is **`false`** ([WhatWG URL Spec § 3.3](https://url.spec.whatwg.org/#idna))
 	* `CheckBidi` is **`false`**
 	* [ContextJ](https://datatracker.ietf.org/doc/html/rfc5892#appendix-A.1):
-		* `ZWNJ` is disallowed **everywhere**.
-		* `ZWJ` **only** appears in emoji sequences.	
+		* `200C (�) ZERO WIDTH NON-JOINER` (ZWNJ) is **disallowed everywhere**.
+		* `200D (�) ZERO WIDTH JOINER` (ZWJ) is **only allowed** in emoji sequences.	
 	* [ContextO](https://datatracker.ietf.org/doc/html/rfc5892#appendix-A.3): 
 		* `B7 (·) MIDDLE DOT` is **disallowed**.
 		* `375 (͵) GREEK LOWER NUMERAL SIGN` is **disallowed**.
@@ -282,7 +282,7 @@ A label is whole-script confusable if a similarly-looking valid label can be con
 * Unicode presentation may vary between applications and devices.
 	* Unicode is text and ultimately subject to font-styling.
 	* Unsupported characters (`�`) may appear unremarkable.
-	* Unsupported emoji sequences with ZWJ may present indistinguishable from those without ZWJ.
+	* Unsupported emoji sequences with ZWJ may appear indistinguishable from those without ZWJ.
 * Names composed of labels of different bidi properties may appear differently depending on context.
 	* Normalization does not enforce single-directional names.
 	* Names may be composed of labels of different bidi however valid labels are never bidi.
@@ -302,6 +302,7 @@ Copyright and related rights waived via [CC0](https://creativecommons.org/public
 
 ## Appendix: Reference Specifications
 
+* [EIP-137: Ethereum Domain Name Service](https://eips.ethereum.org/EIPS/eip-137)
 * [ENSIP-1: ENS](https://docs.ens.domains/ens-improvement-proposals/ensip-1-ens)
 * [UAX-15: Normalization Forms](https://unicode.org/reports/tr15/)
 * [UAX-24: Script Property](https://www.unicode.org/reports/tr24/)
