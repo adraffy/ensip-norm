@@ -95,7 +95,7 @@ Given a list of **Emoji** and **Text** tokens, determine if the composition is v
 		* Must match `/^_*[^_]$/u`
 	* The first and last characters cannot be **Fenced**.
 	* **Fenced** characters cannot be contiguous.
-1. The first characters of every **Text** token must not be a **Combining Mark**.
+1. The first character of every **Text** token must not be a **Combining Mark**.
 1. Concatenate the **Text** tokens together.
 1. Find the first **Group** that contain every text character:
 	* If no group is found, the label cannot be normalized.
